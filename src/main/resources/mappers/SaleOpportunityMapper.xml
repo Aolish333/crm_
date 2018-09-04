@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nuc.jyg.crm.dao.SaleOpportunityMapper" >
+  <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.SaleOpportunity" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="number" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="source" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="customer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="chance" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="summary" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="contact" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="contact_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="opportunity_description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="founder" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="owner" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="assign_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, number, source, customer_name, chance, summary, contact, contact_phone, opportunity_description, 
+    founder, create_time, owner, assign_time, status, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_sale_opportunity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from crm_sale_opportunity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="nuc.jyg.crm.model.SaleOpportunity" >
+    insert into crm_sale_opportunity (id, number, source, 
+      customer_name, chance, summary, 
+      contact, contact_phone, opportunity_description, 
+      founder, create_time, owner, 
+      assign_time, status, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, 
+      #{customerName,jdbcType=VARCHAR}, #{chance,jdbcType=TINYINT}, #{summary,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{opportunityDescription,jdbcType=VARCHAR}, 
+      #{founder,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{owner,jdbcType=VARCHAR}, 
+      #{assignTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="nuc.jyg.crm.model.SaleOpportunity" >
+    insert into crm_sale_opportunity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="chance != null" >
+        chance,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="opportunityDescription != null" >
+        opportunity_description,
+      </if>
+      <if test="founder != null" >
+        founder,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="assignTime != null" >
+        assign_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="chance != null" >
+        #{chance,jdbcType=TINYINT},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="opportunityDescription != null" >
+        #{opportunityDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null" >
+        #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="assignTime != null" >
+        #{assignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.SaleOpportunity" >
+    update crm_sale_opportunity
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="chance != null" >
+        chance = #{chance,jdbcType=TINYINT},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="opportunityDescription != null" >
+        opportunity_description = #{opportunityDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null" >
+        founder = #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="assignTime != null" >
+        assign_time = #{assignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.SaleOpportunity" >
+    update crm_sale_opportunity
+    set number = #{number,jdbcType=INTEGER},
+      source = #{source,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      chance = #{chance,jdbcType=TINYINT},
+      summary = #{summary,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      opportunity_description = #{opportunityDescription,jdbcType=VARCHAR},
+      founder = #{founder,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      owner = #{owner,jdbcType=VARCHAR},
+      assign_time = #{assignTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

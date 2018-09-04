@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nuc.jyg.crm.dao.DataDictionaryMapper" >
+  <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.DataDictionary" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="data_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="kind" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="entry" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="value" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="editable" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, data_number, kind, entry, value, editable, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_data_dictionary
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from crm_data_dictionary
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="nuc.jyg.crm.model.DataDictionary" >
+    insert into crm_data_dictionary (id, data_number, kind, 
+      entry, value, editable, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{dataNumber,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR}, 
+      #{entry,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{editable,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="nuc.jyg.crm.model.DataDictionary" >
+    insert into crm_data_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dataNumber != null" >
+        data_number,
+      </if>
+      <if test="kind != null" >
+        kind,
+      </if>
+      <if test="entry != null" >
+        entry,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+      <if test="editable != null" >
+        editable,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dataNumber != null" >
+        #{dataNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="entry != null" >
+        #{entry,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="editable != null" >
+        #{editable,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.DataDictionary" >
+    update crm_data_dictionary
+    <set >
+      <if test="dataNumber != null" >
+        data_number = #{dataNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="entry != null" >
+        entry = #{entry,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="editable != null" >
+        editable = #{editable,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.DataDictionary" >
+    update crm_data_dictionary
+    set data_number = #{dataNumber,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      entry = #{entry,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR},
+      editable = #{editable,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

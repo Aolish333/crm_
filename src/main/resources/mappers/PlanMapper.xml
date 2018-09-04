@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nuc.jyg.crm.dao.PlanMapper" >
+  <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.Plan" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sale_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="plan_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="plan_result" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sale_id, plan_content, plan_result, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_plan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from crm_plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="nuc.jyg.crm.model.Plan" >
+    insert into crm_plan (id, sale_id, plan_content, 
+      plan_result, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{saleId,jdbcType=INTEGER}, #{planContent,jdbcType=VARCHAR}, 
+      #{planResult,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Plan" >
+    insert into crm_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="saleId != null" >
+        sale_id,
+      </if>
+      <if test="planContent != null" >
+        plan_content,
+      </if>
+      <if test="planResult != null" >
+        plan_result,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="saleId != null" >
+        #{saleId,jdbcType=INTEGER},
+      </if>
+      <if test="planContent != null" >
+        #{planContent,jdbcType=VARCHAR},
+      </if>
+      <if test="planResult != null" >
+        #{planResult,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.Plan" >
+    update crm_plan
+    <set >
+      <if test="saleId != null" >
+        sale_id = #{saleId,jdbcType=INTEGER},
+      </if>
+      <if test="planContent != null" >
+        plan_content = #{planContent,jdbcType=VARCHAR},
+      </if>
+      <if test="planResult != null" >
+        plan_result = #{planResult,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.Plan" >
+    update crm_plan
+    set sale_id = #{saleId,jdbcType=INTEGER},
+      plan_content = #{planContent,jdbcType=VARCHAR},
+      plan_result = #{planResult,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

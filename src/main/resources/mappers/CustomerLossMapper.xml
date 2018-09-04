@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nuc.jyg.crm.dao.CustomerLossMapper" >
+  <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.CustomerLoss" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="loss_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="customer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="customer_manager" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="last_order_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="confirm_loss_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="measures" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="loss_reason" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, loss_number, customer_name, customer_manager, last_order_time, confirm_loss_time, 
+    status, create_time, update_time, measures, loss_reason
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_customer_loss
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from crm_customer_loss
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="nuc.jyg.crm.model.CustomerLoss" >
+    insert into crm_customer_loss (id, loss_number, customer_name, 
+      customer_manager, last_order_time, confirm_loss_time, 
+      status, create_time, update_time, 
+      measures, loss_reason)
+    values (#{id,jdbcType=INTEGER}, #{lossNumber,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{customerManager,jdbcType=VARCHAR}, #{lastOrderTime,jdbcType=DATE}, #{confirmLossTime,jdbcType=DATE}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{measures,jdbcType=VARCHAR}, #{lossReason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="nuc.jyg.crm.model.CustomerLoss" >
+    insert into crm_customer_loss
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lossNumber != null" >
+        loss_number,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="customerManager != null" >
+        customer_manager,
+      </if>
+      <if test="lastOrderTime != null" >
+        last_order_time,
+      </if>
+      <if test="confirmLossTime != null" >
+        confirm_loss_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="measures != null" >
+        measures,
+      </if>
+      <if test="lossReason != null" >
+        loss_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lossNumber != null" >
+        #{lossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerManager != null" >
+        #{customerManager,jdbcType=VARCHAR},
+      </if>
+      <if test="lastOrderTime != null" >
+        #{lastOrderTime,jdbcType=DATE},
+      </if>
+      <if test="confirmLossTime != null" >
+        #{confirmLossTime,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measures != null" >
+        #{measures,jdbcType=VARCHAR},
+      </if>
+      <if test="lossReason != null" >
+        #{lossReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.CustomerLoss" >
+    update crm_customer_loss
+    <set >
+      <if test="lossNumber != null" >
+        loss_number = #{lossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerManager != null" >
+        customer_manager = #{customerManager,jdbcType=VARCHAR},
+      </if>
+      <if test="lastOrderTime != null" >
+        last_order_time = #{lastOrderTime,jdbcType=DATE},
+      </if>
+      <if test="confirmLossTime != null" >
+        confirm_loss_time = #{confirmLossTime,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measures != null" >
+        measures = #{measures,jdbcType=VARCHAR},
+      </if>
+      <if test="lossReason != null" >
+        loss_reason = #{lossReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.CustomerLoss" >
+    update crm_customer_loss
+    set loss_number = #{lossNumber,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      customer_manager = #{customerManager,jdbcType=VARCHAR},
+      last_order_time = #{lastOrderTime,jdbcType=DATE},
+      confirm_loss_time = #{confirmLossTime,jdbcType=DATE},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      measures = #{measures,jdbcType=VARCHAR},
+      loss_reason = #{lossReason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
