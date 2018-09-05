@@ -23,7 +23,7 @@ mybatis:
   # 对应实体类的包结构
   type-aliases-package: nuc.jyg.crm.model
   # mapper.xml 文件的路径
-  mapper-locations: classpath:/mappers/*.xml
+  mapper-locations: classpath:/nuc/jyg/crm/dao/*.xml
   configuration:
     # 启用缓存
     cache-enabled: true
