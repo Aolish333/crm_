@@ -19,9 +19,4 @@ public class HomeController {
     public String welcome() {
         return "index";
     }
-
-    @GetMapping(value = "/sales")
-    public String sale() {
-        return "sales-opportunity";
-    }
 }

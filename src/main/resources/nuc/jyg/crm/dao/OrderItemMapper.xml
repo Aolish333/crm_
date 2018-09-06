@@ -1,166 +1,174 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="nuc.jyg.crm.dao.OrderItemMapper" >
-  <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.OrderItem" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="customer_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="product_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="unit" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="unit_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="total_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, customer_id, order_no, product_id, product_name, quantity, unit, unit_price, 
-    total_price, create_time, update_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from crm_orderitem
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from crm_orderitem
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="nuc.jyg.crm.model.OrderItem" >
-    insert into crm_orderitem (id, customer_id, order_no, 
-      product_id, product_name, quantity, 
-      unit, unit_price, total_price, 
-      create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, 
-      #{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
-      #{unit,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DECIMAL}, #{totalPrice,jdbcType=DECIMAL},
-                                    now(), now())
-  </insert>
-  <insert id="insertSelective" parameterType="nuc.jyg.crm.model.OrderItem" >
-    insert into crm_orderitem
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="customerId != null" >
-        customer_id,
-      </if>
-      <if test="orderNo != null" >
-        order_no,
-      </if>
-      <if test="productId != null" >
-        product_id,
-      </if>
-      <if test="productName != null" >
-        product_name,
-      </if>
-      <if test="quantity != null" >
-        quantity,
-      </if>
-      <if test="unit != null" >
-        unit,
-      </if>
-      <if test="unitPrice != null" >
-        unit_price,
-      </if>
-      <if test="totalPrice != null" >
-        total_price,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="customerId != null" >
-        #{customerId,jdbcType=INTEGER},
-      </if>
-      <if test="orderNo != null" >
-        #{orderNo,jdbcType=BIGINT},
-      </if>
-      <if test="productId != null" >
-        #{productId,jdbcType=INTEGER},
-      </if>
-      <if test="productName != null" >
-        #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="quantity != null" >
-        #{quantity,jdbcType=INTEGER},
-      </if>
-      <if test="unit != null" >
-        #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="unitPrice != null" >
-        #{unitPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="totalPrice != null" >
-        #{totalPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="createTime != null" >
-        now(),
-      </if>
-      <if test="updateTime != null" >
-        now(),
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.OrderItem" >
-    update crm_orderitem
-    <set >
-      <if test="customerId != null" >
-        customer_id = #{customerId,jdbcType=INTEGER},
-      </if>
-      <if test="orderNo != null" >
-        order_no = #{orderNo,jdbcType=BIGINT},
-      </if>
-      <if test="productId != null" >
-        product_id = #{productId,jdbcType=INTEGER},
-      </if>
-      <if test="productName != null" >
-        product_name = #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="quantity != null" >
-        quantity = #{quantity,jdbcType=INTEGER},
-      </if>
-      <if test="unit != null" >
-        unit = #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="unitPrice != null" >
-        unit_price = #{unitPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="totalPrice != null" >
-        total_price = #{totalPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.OrderItem" >
-    update crm_orderitem
-    set customer_id = #{customerId,jdbcType=INTEGER},
-      order_no = #{orderNo,jdbcType=BIGINT},
-      product_id = #{productId,jdbcType=INTEGER},
-      product_name = #{productName,jdbcType=VARCHAR},
-      quantity = #{quantity,jdbcType=INTEGER},
-      unit = #{unit,jdbcType=VARCHAR},
-      unit_price = #{unitPrice,jdbcType=DECIMAL},
-      total_price = #{totalPrice,jdbcType=DECIMAL},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="nuc.jyg.crm.dao.OrderItemMapper">
+    <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.OrderItem">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="customer_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="product_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="quantity" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="unit" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="unit_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="total_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, customer_id, order_no, product_id, product_name, quantity, unit, unit_price,
+        total_price, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from crm_orderitem
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectOrderItemsByOrderNo" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from crm_orderitem
+        where orderNo = #{orderNo}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM crm_orderitem
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="nuc.jyg.crm.model.OrderItem">
+        INSERT INTO crm_orderitem (id, customer_id, order_no,
+                                   product_id, product_name, quantity,
+                                   unit, unit_price, total_price,
+                                   create_time, update_time)
+        VALUES (#{id,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT},
+                                        #{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR},
+                                        #{quantity,jdbcType=INTEGER},
+                                        #{unit,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DECIMAL},
+                                        #{totalPrice,jdbcType=DECIMAL},
+                                        now(), now())
+    </insert>
+    <insert id="insertSelective" parameterType="nuc.jyg.crm.model.OrderItem">
+        insert into crm_orderitem
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="quantity != null">
+                quantity,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="unitPrice != null">
+                unit_price,
+            </if>
+            <if test="totalPrice != null">
+                total_price,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null">
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice != null">
+                #{unitPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="totalPrice != null">
+                #{totalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                now(),
+            </if>
+            <if test="updateTime != null">
+                now(),
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.OrderItem">
+        update crm_orderitem
+        <set>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null">
+                quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice != null">
+                unit_price = #{unitPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="totalPrice != null">
+                total_price = #{totalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.OrderItem">
+        UPDATE crm_orderitem
+        SET customer_id  = #{customerId,jdbcType=INTEGER},
+            order_no     = #{orderNo,jdbcType=BIGINT},
+            product_id   = #{productId,jdbcType=INTEGER},
+            product_name = #{productName,jdbcType=VARCHAR},
+            quantity     = #{quantity,jdbcType=INTEGER},
+            unit         = #{unit,jdbcType=VARCHAR},
+            unit_price   = #{unitPrice,jdbcType=DECIMAL},
+            total_price  = #{totalPrice,jdbcType=DECIMAL},
+            create_time  = #{createTime,jdbcType=TIMESTAMP},
+            update_time  = #{updateTime,jdbcType=TIMESTAMP}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

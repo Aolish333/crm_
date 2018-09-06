@@ -1,332 +1,362 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="nuc.jyg.crm.dao.CustomerMapper" >
-  <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.Customer" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="number" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="customer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="contact_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="contact_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="area" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="manager" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="grade" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="satisfaction" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="credit" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="mail" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="fax" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="registration_number" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="legal_person" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="registered_capital" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="annual_turnover" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="blank" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="blank_number" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="localtax_number" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="nationaltax_number" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, number, customer_name, contact_name, contact_phone, status, area, manager, grade, 
-    satisfaction, credit, address, mail, fax, url, registration_number, legal_person, 
-    registered_capital, annual_turnover, blank, blank_number, localtax_number, nationaltax_number, 
-    create_time, update_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from crm_customer
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from crm_customer
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="nuc.jyg.crm.model.Customer" >
-    insert into crm_customer (id, number, customer_name, 
-      contact_name, contact_phone, status, 
-      area, manager, grade, 
-      satisfaction, credit, address, 
-      mail, fax, url, registration_number, 
-      legal_person, registered_capital, annual_turnover, 
-      blank, blank_number, localtax_number, 
-      nationaltax_number, create_time, update_time
-      )
-    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
-      #{contactName,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{area,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR}, #{grade,jdbcType=TINYINT}, 
-      #{satisfaction,jdbcType=TINYINT}, #{credit,jdbcType=TINYINT}, #{address,jdbcType=VARCHAR}, 
-      #{mail,jdbcType=INTEGER}, #{fax,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{registrationNumber,jdbcType=VARCHAR}, 
-      #{legalPerson,jdbcType=VARCHAR}, #{registeredCapital,jdbcType=INTEGER}, #{annualTurnover,jdbcType=BIGINT}, 
-      #{blank,jdbcType=VARCHAR}, #{blankNumber,jdbcType=VARCHAR}, #{localtaxNumber,jdbcType=VARCHAR}, 
-      #{nationaltaxNumber,jdbcType=VARCHAR}, now(), now()
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Customer" >
-    insert into crm_customer
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="number != null" >
-        number,
-      </if>
-      <if test="customerName != null" >
-        customer_name,
-      </if>
-      <if test="contactName != null" >
-        contact_name,
-      </if>
-      <if test="contactPhone != null" >
-        contact_phone,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="area != null" >
-        area,
-      </if>
-      <if test="manager != null" >
-        manager,
-      </if>
-      <if test="grade != null" >
-        grade,
-      </if>
-      <if test="satisfaction != null" >
-        satisfaction,
-      </if>
-      <if test="credit != null" >
-        credit,
-      </if>
-      <if test="address != null" >
-        address,
-      </if>
-      <if test="mail != null" >
-        mail,
-      </if>
-      <if test="fax != null" >
-        fax,
-      </if>
-      <if test="url != null" >
-        url,
-      </if>
-      <if test="registrationNumber != null" >
-        registration_number,
-      </if>
-      <if test="legalPerson != null" >
-        legal_person,
-      </if>
-      <if test="registeredCapital != null" >
-        registered_capital,
-      </if>
-      <if test="annualTurnover != null" >
-        annual_turnover,
-      </if>
-      <if test="blank != null" >
-        blank,
-      </if>
-      <if test="blankNumber != null" >
-        blank_number,
-      </if>
-      <if test="localtaxNumber != null" >
-        localtax_number,
-      </if>
-      <if test="nationaltaxNumber != null" >
-        nationaltax_number,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="number != null" >
-        #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="customerName != null" >
-        #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="contactName != null" >
-        #{contactName,jdbcType=VARCHAR},
-      </if>
-      <if test="contactPhone != null" >
-        #{contactPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="area != null" >
-        #{area,jdbcType=VARCHAR},
-      </if>
-      <if test="manager != null" >
-        #{manager,jdbcType=VARCHAR},
-      </if>
-      <if test="grade != null" >
-        #{grade,jdbcType=TINYINT},
-      </if>
-      <if test="satisfaction != null" >
-        #{satisfaction,jdbcType=TINYINT},
-      </if>
-      <if test="credit != null" >
-        #{credit,jdbcType=TINYINT},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="mail != null" >
-        #{mail,jdbcType=INTEGER},
-      </if>
-      <if test="fax != null" >
-        #{fax,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null" >
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="registrationNumber != null" >
-        #{registrationNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="legalPerson != null" >
-        #{legalPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="registeredCapital != null" >
-        #{registeredCapital,jdbcType=INTEGER},
-      </if>
-      <if test="annualTurnover != null" >
-        #{annualTurnover,jdbcType=BIGINT},
-      </if>
-      <if test="blank != null" >
-        #{blank,jdbcType=VARCHAR},
-      </if>
-      <if test="blankNumber != null" >
-        #{blankNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="localtaxNumber != null" >
-        #{localtaxNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="nationaltaxNumber != null" >
-        #{nationaltaxNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        now(),
-      </if>
-      <if test="updateTime != null" >
-        now(),
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.Customer" >
-    update crm_customer
-    <set >
-      <if test="number != null" >
-        number = #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="customerName != null" >
-        customer_name = #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="contactName != null" >
-        contact_name = #{contactName,jdbcType=VARCHAR},
-      </if>
-      <if test="contactPhone != null" >
-        contact_phone = #{contactPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="area != null" >
-        area = #{area,jdbcType=VARCHAR},
-      </if>
-      <if test="manager != null" >
-        manager = #{manager,jdbcType=VARCHAR},
-      </if>
-      <if test="grade != null" >
-        grade = #{grade,jdbcType=TINYINT},
-      </if>
-      <if test="satisfaction != null" >
-        satisfaction = #{satisfaction,jdbcType=TINYINT},
-      </if>
-      <if test="credit != null" >
-        credit = #{credit,jdbcType=TINYINT},
-      </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="mail != null" >
-        mail = #{mail,jdbcType=INTEGER},
-      </if>
-      <if test="fax != null" >
-        fax = #{fax,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null" >
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="registrationNumber != null" >
-        registration_number = #{registrationNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="legalPerson != null" >
-        legal_person = #{legalPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="registeredCapital != null" >
-        registered_capital = #{registeredCapital,jdbcType=INTEGER},
-      </if>
-      <if test="annualTurnover != null" >
-        annual_turnover = #{annualTurnover,jdbcType=BIGINT},
-      </if>
-      <if test="blank != null" >
-        blank = #{blank,jdbcType=VARCHAR},
-      </if>
-      <if test="blankNumber != null" >
-        blank_number = #{blankNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="localtaxNumber != null" >
-        localtax_number = #{localtaxNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="nationaltaxNumber != null" >
-        nationaltax_number = #{nationaltaxNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.Customer" >
-    update crm_customer
-    set number = #{number,jdbcType=VARCHAR},
-      customer_name = #{customerName,jdbcType=VARCHAR},
-      contact_name = #{contactName,jdbcType=VARCHAR},
-      contact_phone = #{contactPhone,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
-      area = #{area,jdbcType=VARCHAR},
-      manager = #{manager,jdbcType=VARCHAR},
-      grade = #{grade,jdbcType=TINYINT},
-      satisfaction = #{satisfaction,jdbcType=TINYINT},
-      credit = #{credit,jdbcType=TINYINT},
-      address = #{address,jdbcType=VARCHAR},
-      mail = #{mail,jdbcType=INTEGER},
-      fax = #{fax,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      registration_number = #{registrationNumber,jdbcType=VARCHAR},
-      legal_person = #{legalPerson,jdbcType=VARCHAR},
-      registered_capital = #{registeredCapital,jdbcType=INTEGER},
-      annual_turnover = #{annualTurnover,jdbcType=BIGINT},
-      blank = #{blank,jdbcType=VARCHAR},
-      blank_number = #{blankNumber,jdbcType=VARCHAR},
-      localtax_number = #{localtaxNumber,jdbcType=VARCHAR},
-      nationaltax_number = #{nationaltaxNumber,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="nuc.jyg.crm.dao.CustomerMapper">
+    <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.Customer">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="number" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="customer_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="contact_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="contact_phone" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+            <arg column="area" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="manager" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="grade" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+            <arg column="satisfaction" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+            <arg column="credit" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+            <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="mail" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="fax" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="registration_number" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="legal_person" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="registered_capital" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="annual_turnover" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="blank" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="blank_number" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="localtax_number" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="nationaltax_number" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, number, customer_name, contact_name, contact_phone, status, area, manager, grade,
+        satisfaction, credit, address, mail, fax, url, registration_number, legal_person,
+        registered_capital, annual_turnover, blank, blank_number, localtax_number, nationaltax_number,
+        create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from crm_customer
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from crm_customer
+        where customer_name = #{customerName}
+    </select>
+    <select id="selectAllCustomers" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from crm_customer
+    </select>
+    <select id="selectQuantityOfCustomerByGrade" resultType="int" parameterType="int">
+        SELECT count(1)
+        FROM crm_customer
+        WHERE credit = #{credit}
+    </select>
+    <select id="selectQuantityOfCustomerByCredit" resultType="int" parameterType="int">
+        SELECT count(1)
+        FROM crm_customer
+        WHERE grade = #{grade}
+    </select>
+    <select id="selectQuantityOfCustomerBySatisfaction" resultType="int" parameterType="int">
+        SELECT count(1)
+        FROM crm_customer
+        WHERE satisfaction = #{satisfaction}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM crm_customer
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="nuc.jyg.crm.model.Customer">
+        INSERT INTO crm_customer (id, number, customer_name,
+                                  contact_name, contact_phone, status,
+                                  area, manager, grade,
+                                  satisfaction, credit, address,
+                                  mail, fax, url, registration_number,
+                                  legal_person, registered_capital, annual_turnover,
+                                  blank, blank_number, localtax_number,
+                                  nationaltax_number, create_time, update_time
+        )
+        VALUES (#{id,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR},
+                                        #{contactName,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR},
+                                        #{status,jdbcType=TINYINT},
+                                        #{area,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR},
+                                        #{grade,jdbcType=TINYINT},
+                                        #{satisfaction,jdbcType=TINYINT}, #{credit,jdbcType=TINYINT},
+            #{address,jdbcType=VARCHAR},
+            #{mail,jdbcType=INTEGER}, #{fax,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+            #{registrationNumber,jdbcType=VARCHAR},
+            #{legalPerson,jdbcType=VARCHAR}, #{registeredCapital,jdbcType=INTEGER}, #{annualTurnover,jdbcType=BIGINT},
+            #{blank,jdbcType=VARCHAR}, #{blankNumber,jdbcType=VARCHAR}, #{localtaxNumber,jdbcType=VARCHAR},
+                #{nationaltaxNumber,jdbcType=VARCHAR}, now(), now()
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Customer">
+        insert into crm_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="customerName != null">
+                customer_name,
+            </if>
+            <if test="contactName != null">
+                contact_name,
+            </if>
+            <if test="contactPhone != null">
+                contact_phone,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="manager != null">
+                manager,
+            </if>
+            <if test="grade != null">
+                grade,
+            </if>
+            <if test="satisfaction != null">
+                satisfaction,
+            </if>
+            <if test="credit != null">
+                credit,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="mail != null">
+                mail,
+            </if>
+            <if test="fax != null">
+                fax,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="registrationNumber != null">
+                registration_number,
+            </if>
+            <if test="legalPerson != null">
+                legal_person,
+            </if>
+            <if test="registeredCapital != null">
+                registered_capital,
+            </if>
+            <if test="annualTurnover != null">
+                annual_turnover,
+            </if>
+            <if test="blank != null">
+                blank,
+            </if>
+            <if test="blankNumber != null">
+                blank_number,
+            </if>
+            <if test="localtaxNumber != null">
+                localtax_number,
+            </if>
+            <if test="nationaltaxNumber != null">
+                nationaltax_number,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactName != null">
+                #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null">
+                #{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="manager != null">
+                #{manager,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=TINYINT},
+            </if>
+            <if test="satisfaction != null">
+                #{satisfaction,jdbcType=TINYINT},
+            </if>
+            <if test="credit != null">
+                #{credit,jdbcType=TINYINT},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="mail != null">
+                #{mail,jdbcType=INTEGER},
+            </if>
+            <if test="fax != null">
+                #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="registrationNumber != null">
+                #{registrationNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPerson != null">
+                #{legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredCapital != null">
+                #{registeredCapital,jdbcType=INTEGER},
+            </if>
+            <if test="annualTurnover != null">
+                #{annualTurnover,jdbcType=BIGINT},
+            </if>
+            <if test="blank != null">
+                #{blank,jdbcType=VARCHAR},
+            </if>
+            <if test="blankNumber != null">
+                #{blankNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="localtaxNumber != null">
+                #{localtaxNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="nationaltaxNumber != null">
+                #{nationaltaxNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                now(),
+            </if>
+            <if test="updateTime != null">
+                now(),
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.Customer">
+        update crm_customer
+        <set>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactName != null">
+                contact_name = #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null">
+                contact_phone = #{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="manager != null">
+                manager = #{manager,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                grade = #{grade,jdbcType=TINYINT},
+            </if>
+            <if test="satisfaction != null">
+                satisfaction = #{satisfaction,jdbcType=TINYINT},
+            </if>
+            <if test="credit != null">
+                credit = #{credit,jdbcType=TINYINT},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="mail != null">
+                mail = #{mail,jdbcType=INTEGER},
+            </if>
+            <if test="fax != null">
+                fax = #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="registrationNumber != null">
+                registration_number = #{registrationNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPerson != null">
+                legal_person = #{legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredCapital != null">
+                registered_capital = #{registeredCapital,jdbcType=INTEGER},
+            </if>
+            <if test="annualTurnover != null">
+                annual_turnover = #{annualTurnover,jdbcType=BIGINT},
+            </if>
+            <if test="blank != null">
+                blank = #{blank,jdbcType=VARCHAR},
+            </if>
+            <if test="blankNumber != null">
+                blank_number = #{blankNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="localtaxNumber != null">
+                localtax_number = #{localtaxNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="nationaltaxNumber != null">
+                nationaltax_number = #{nationaltaxNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.Customer">
+        UPDATE crm_customer
+        SET number              = #{number,jdbcType=VARCHAR},
+            customer_name       = #{customerName,jdbcType=VARCHAR},
+            contact_name        = #{contactName,jdbcType=VARCHAR},
+            contact_phone       = #{contactPhone,jdbcType=VARCHAR},
+            status              = #{status,jdbcType=TINYINT},
+            area                = #{area,jdbcType=VARCHAR},
+            manager             = #{manager,jdbcType=VARCHAR},
+            grade               = #{grade,jdbcType=TINYINT},
+            satisfaction        = #{satisfaction,jdbcType=TINYINT},
+            credit              = #{credit,jdbcType=TINYINT},
+            address             = #{address,jdbcType=VARCHAR},
+            mail                = #{mail,jdbcType=INTEGER},
+            fax                 = #{fax,jdbcType=VARCHAR},
+            url                 = #{url,jdbcType=VARCHAR},
+            registration_number = #{registrationNumber,jdbcType=VARCHAR},
+            legal_person        = #{legalPerson,jdbcType=VARCHAR},
+            registered_capital  = #{registeredCapital,jdbcType=INTEGER},
+            annual_turnover     = #{annualTurnover,jdbcType=BIGINT},
+            blank               = #{blank,jdbcType=VARCHAR},
+            blank_number        = #{blankNumber,jdbcType=VARCHAR},
+            localtax_number     = #{localtaxNumber,jdbcType=VARCHAR},
+            nationaltax_number  = #{nationaltaxNumber,jdbcType=VARCHAR},
+            create_time         = #{createTime,jdbcType=TIMESTAMP},
+            update_time         = #{updateTime,jdbcType=TIMESTAMP}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

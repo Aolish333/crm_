@@ -22,6 +22,25 @@
     from crm_order
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByCustomerIdAndStatus" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from crm_order
+    where customer_id = #{id} and status = #{status}
+  </select>
+  <select id="selectOrdersByUserIdAndStatusAndYears" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from crm_order
+    where customer_id = #{id} and status = #{status}
+    and update_time between #{yearsStart} and #{yearsEnd}
+  </select>
+  <select id="selectLastOrdersByCustomerId" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />,max(update_time) time
+    from crm_order
+    where customer_id = #{customerId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from crm_order
     where id = #{id,jdbcType=INTEGER}
