@@ -11,7 +11,7 @@ import java.util.UUID;
  * @date 8:46 2018/9/6.
  */
 @NoArgsConstructor
-public final class NumberUtil {
+public final class NumberGenerationUtil {
 
     /**
      * 得到32位唯一的UUID
