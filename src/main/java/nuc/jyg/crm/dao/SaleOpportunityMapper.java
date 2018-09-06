@@ -1,7 +1,9 @@
 package nuc.jyg.crm.dao;
 
 import nuc.jyg.crm.model.SaleOpportunity;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface SaleOpportunityMapper {
 
     int deleteByPrimaryKey(Integer id);

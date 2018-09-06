@@ -1,0 +1,309 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML><html lang="zh-CN"      xmlns="http://www.w3.org/1999/xhtml"      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/public/html5shiv.js" th:src="@{/html5shiv.js}"></script>
+<script type="text/javascript" src="/public/respond.min.js" th:src="@{/respond.min.js}"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css" th:href="@{/h-ui/css/H-ui.min.css}" />
+<link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/H-ui.admin.css" th:href="@{/h-ui.admin/css/H-ui.admin.css}" />
+<link rel="stylesheet" type="text/css" href="/public/Hui-iconfont/1.0.8/iconfont.css" th:href="@{/Hui-iconfont/1.0.8/iconfont.css}" />
+<link rel="stylesheet" type="text/css" href="/static/h-ui.admin/skin/default/skin.css" th:href="@{/h-ui.admin/skin/green/skin.css}" id="skin" />
+<link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/style.css" th:href="@{/h-ui.admin/css/style.css}" />
+<!--[if IE 6]>
+<script type="text/javascript" src="/public/DD_belatedPNG_0.0.8a-min.js" th:src="@{/DD_belatedPNG_0.0.8a-min.js}" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<!--/meta 作为公共模版分离出去-->
+
+<title>客户信息管理</title>
+<meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+<meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 客户信息管理 <span class="c-gray en">&gt;</span> 客户信息 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="text-c">
+	<span style="float:right;"><a button  class="btn btn-primary radius" href="customer-information-container.html">联系人</button></a>&nbsp;
+	<a button  class="btn btn-primary radius" href="customer-information-record.html">交往记录</button></a>&nbsp;
+	<a button  class="btn btn-primary radius" href="customer-information-history.html">历史订单</button></a></span>
+	 
+	</div>
+	<form class="form form-horizontal" id="form-article-add">
+	
+	
+	    <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">客户编号：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span >KH071202001</span>
+			</div>
+		</div>
+	
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="北京聪海信息科技有限公司" placeholder="" id="name" name="name">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>地区：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select class="select" size="1" id="area" name="area">
+					<option value="1" selected>北京</option>
+					<option value="2">上海</option>
+					<option value="3">广州</option>
+				</select>
+				</span> </div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>客户经理：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select class="select" size="1" id="manager" name="manager">
+					<option value="1" selected>小明</option>
+					<option value="2">张三</option>
+					<option value="3">李四</option>
+				</select>
+				</span> </div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>客户等级：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select class="select" size="1" id="level" name="level">
+					<option value="1" selected>战略合作伙伴</option>
+					<option value="2">合作伙伴</option>
+					<option value="3">大客户</option>
+					<option value="4">重点开发客户</option>
+					<option value="5">普通客户</option>
+				</select>
+				</span> </div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>客户满意度：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select class="select" size="1" id="satisfy" name="satisfy">
+					<option value="1">☆</option>
+					<option value="2">☆☆</option>
+					<option value="3" selected>☆☆☆</option>
+					<option value="4">☆☆☆☆</option>
+					<option value="5">☆☆☆☆☆</option>
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>客户信用度：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select class="select" size="1" id="faith" name="faith">
+					<option value="" selected>☆☆☆</option>
+					<option value="1">☆</option>
+					<option value="2">☆☆</option>
+					<option value="3">☆☆☆</option>
+					<option value="4">☆☆☆☆</option>
+					<option value="5">☆☆☆☆☆</option>
+				</select>
+				</span> </div>
+		</div>
+		
+		
+		
+		
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>地址：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="北京市海淀区成府路702" placeholder="" id="location" name="location">
+			</div>
+		</div>
+		
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>邮政编码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="100027" placeholder="" id="post" name="post">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>电话：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="tel" name="tel">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>传真：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="010-62283396" placeholder="" id="fax" name="fax">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>网址：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="www.conghai.com" placeholder="" id="web" name="web">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">营业执照注册号：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="license" name="license">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>法人：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="聪颖" placeholder="" id="legalperson" name="legalperson">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">注册资金（万元）：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="capital" name="capital">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">年营业额：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="turnover" name="turnover">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>开户银行：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="北京银行 中关村支行" placeholder="" id="bank" name="bank">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>银行账号：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="62258827238382838" placeholder="" id="accountnumber" name="accountnumber">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">地税登记号：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="dtaxi" name="d-taxi">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">国税登记号：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="www.conghai.com" placeholder="" id="gtaxi" name="g-taxi">
+			</div>
+		</div>
+	
+		
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+		
+					<a class="btn btn-default radius" type="button" href="javascript:window.location.href ='customer-information-management.html'">返回客户信息管理界面</a>
+			
+			</div>
+		</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/public/jquery/1.9.1/jquery.min.js" th:src="@{/jquery/1.9.1/jquery.min.js}"></script>
+<script type="text/javascript" src="/public/layer/2.4/layer.js" th:src="@{/layer/2.4/layer.js}"></script>
+<script type="text/javascript" src="/static/h-ui/js/H-ui.min.js" th:src="@{/h-ui/js/H-ui.min.js}"></script>
+<script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.js" th:src="@{/h-ui.admin/js/H-ui.admin.js}"></script> <!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="public/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="public/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="public/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="public/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	//表单验证
+	$("#form-article-add").validate({
+		rules:{
+			name:{
+				required:true,
+			},
+			area:{
+				required:true,
+			},
+			manager:{
+				required:true,
+			},
+			level:{
+				required:true,
+			},
+			satisfy:{
+				required:true,
+			},
+			faith:{
+				required:true,
+			},
+			location:{
+				required:true,
+			},
+			post:{
+				required:true,
+			},
+			tel:{
+				required:true,
+				istel:true,
+			},
+			fax:{
+				required:true,
+				isfax:true,
+			},
+			web:{
+				required:true,
+			},
+			legalperson:{
+				required:true,
+			},
+			bank:{
+				required:true,
+			},
+			accountnumber:{
+				required:true,
+			},
+			
+		},
+			onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			//$(form).ajaxSubmit();
+			var index = parent.layer.getFrameIndex(window.name);
+			//parent.$('.btn-refresh').click();
+			parent.layer.close(index);
+		}
+	});
+
+});
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
