@@ -37,7 +37,7 @@
       measures, loss_reason)
     values (#{id,jdbcType=INTEGER}, #{lossNumber,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
       #{customerManager,jdbcType=VARCHAR}, #{lastOrderTime,jdbcType=DATE}, #{confirmLossTime,jdbcType=DATE}, 
-      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, now(), now(),
       #{measures,jdbcType=VARCHAR}, #{lossReason,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="nuc.jyg.crm.model.CustomerLoss" >
@@ -100,10 +100,10 @@
         #{status,jdbcType=TINYINT},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="measures != null" >
         #{measures,jdbcType=VARCHAR},

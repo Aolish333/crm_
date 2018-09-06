@@ -44,8 +44,8 @@
     values (#{id,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, 
       #{customerName,jdbcType=VARCHAR}, #{chance,jdbcType=TINYINT}, #{summary,jdbcType=VARCHAR}, 
       #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{opportunityDescription,jdbcType=VARCHAR}, 
-      #{founder,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{owner,jdbcType=VARCHAR}, 
-      #{assignTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}
+      #{founder,jdbcType=VARCHAR}, now(), #{owner,jdbcType=VARCHAR},
+      #{assignTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, now()
       )
   </insert>
   <insert id="insertSelective" parameterType="nuc.jyg.crm.model.SaleOpportunity" >
@@ -129,7 +129,7 @@
         #{founder,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="owner != null" >
         #{owner,jdbcType=VARCHAR},
@@ -141,7 +141,7 @@
         #{status,jdbcType=TINYINT},
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>

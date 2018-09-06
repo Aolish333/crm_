@@ -37,8 +37,8 @@
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, 
       #{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
-      #{unit,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DECIMAL}, #{totalPrice,jdbcType=DECIMAL}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      #{unit,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DECIMAL}, #{totalPrice,jdbcType=DECIMAL},
+                                    now(), now())
   </insert>
   <insert id="insertSelective" parameterType="nuc.jyg.crm.model.OrderItem" >
     insert into crm_orderitem
@@ -106,10 +106,10 @@
         #{totalPrice,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>

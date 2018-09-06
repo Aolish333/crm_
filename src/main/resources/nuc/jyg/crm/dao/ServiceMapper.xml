@@ -48,7 +48,7 @@
       #{summary,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
       #{serviceRequest,jdbcType=VARCHAR}, #{founder,jdbcType=VARCHAR}, #{customerManager,jdbcType=VARCHAR}, 
       #{distributionTime,jdbcType=TIMESTAMP}, #{serviceProcess,jdbcType=VARCHAR}, #{processerName,jdbcType=VARCHAR}, 
-      #{processTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{processTime,jdbcType=TIMESTAMP}, now(), now(),
       #{processResult,jdbcType=VARCHAR}, #{processSatisfaction,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Service" >
@@ -147,10 +147,10 @@
         #{processTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="processResult != null" >
         #{processResult,jdbcType=VARCHAR},
