@@ -1,0 +1,193 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="Bookmark" href="/favicon.ico">
+    <link rel="Shortcut Icon" href="/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/public/html5shiv.js" th:src="@{/html5shiv.js}"></script>
+    <script type="text/javascript" src="/public/respond.min.js" th:src="@{/respond.min.js}"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css" th:href="@{/h-ui/css/H-ui.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/H-ui.admin.css"
+          th:href="@{/h-ui.admin/css/H-ui.admin.css}"/>
+    <link rel="stylesheet" type="text/css" href="/public/Hui-iconfont/1.0.8/iconfont.css"
+          th:href="@{/Hui-iconfont/1.0.8/iconfont.css}"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/skin/default/skin.css"
+          th:href="@{/h-ui.admin/skin/green/skin.css}" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/style.css"
+          th:href="@{/h-ui.admin/css/style.css}"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/public/DD_belatedPNG_0.0.8a-min.js"
+            th:src="@{/DD_belatedPNG_0.0.8a-min.js}"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+
+    <title>添加字典 - H-ui.admin v3.1</title>
+    <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+    <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+<title>新建字典条目</title>
+</head>
+<body>
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 基础数据 <span
+        class="c-gray en">&gt;</span> 数据字典管理 <span class="c-gray en">&gt;</span> 新建字典条目 <a
+        class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+        href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<article class="page-container">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">编号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="id" name="id">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>类别：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="category" name="category">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>条目：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="entry" name="entry">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>值：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="value" name="value">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">是否可编辑：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="check-box">
+                    <input type="checkbox" id="checkbox-1">
+                    <label for="checkbox-1">&nbsp;</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;保存&nbsp;&nbsp;">
+                <a class="btn btn-default radius" type="button"
+                   href="javascript:window.location.href ='system-dictionary.html'">返回数据字典界面</a>
+            </div>
+        </div>
+    </form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/public/jquery/1.9.1/jquery.min.js"
+        th:src="@{/jquery/1.9.1/jquery.min.js}"></script>
+<script type="text/javascript" src="/public/layer/2.4/layer.js" th:src="@{/layer/2.4/layer.js}"></script>
+<script type="text/javascript" src="/static/h-ui/js/H-ui.min.js" th:src="@{/h-ui/js/H-ui.min.js}"></script>
+<script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.js"
+        th:src="@{/h-ui.admin/js/H-ui.admin.js}"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="public/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="public/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="public/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="public/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+    $(".inputtable").keyup(function () {
+        var content = $(this).val();
+        //如果当前搜索内容为空，无须进行查询
+        if (content == "") {
+            $("#context1").css("display", "none");
+            return;
+        }
+        //由于浏览器的缓存机制 所以我们每次传入一个时间
+        var time = new Date().getTime();
+        $.ajax({
+            type: "get",
+            //新建一个名为findBooksAjaxServlet的servlet
+            url: "${pageContext.request.contextPath}/servlet/findBooksAjaxServlet",
+            data: {name: content, time: time},
+            success: function (data) {
+                //拼接html
+                var res = data.split(",");
+                var html = "";
+                for (var i = 0; i < res.length; i++) {
+                    //每一个div还有鼠标移出、移入点击事件
+                    html += "<div onclick='setSearch_onclick(this)' onmouseout='changeBackColor_out(this)' onmouseover='changeBackColor_over(this)'>" + res[i] + "</div>";
+                }
+                $("#context1").html(html);
+                //显示为块级元素
+                $("#context1").css("display", "block");
+            }
+        });
+    });
+
+    //鼠标移动到内容上
+    function changeBackColor_over(div) {
+        $(div).css("background-color", "#CCCCCC");
+    }
+
+    //鼠标离开内容
+    function changeBackColor_out(div) {
+        $(div).css("background-color", "");
+    }
+
+    //将点击的内容放到搜索框
+    function setSearch_onclick(div) {
+        $(".inputtable").val(div.innerText);
+        $("#context1").css("display", "none");
+    }
+
+
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form-member-add").validate({
+            rules: {
+                category: {
+                    required: true,
+
+                },
+                entry: {
+                    required: true,
+                },
+                value: {
+                    required: true,
+
+                },
+
+
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                //$(form).ajaxSubmit();
+                var index = parent.layer.getFrameIndex(window.name);
+                //parent.$('.btn-refresh').click();
+                parent.layer.close(index);
+            }
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

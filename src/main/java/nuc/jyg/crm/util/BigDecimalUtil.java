@@ -30,7 +30,7 @@ public class BigDecimalUtil {
         return b1.multiply(b2);
     }
 
-    @SuppressWarnings("AlibabaAvoidCommentBehindStatement")
+    @SuppressWarnings("ApublicabaAvoidCommentBehindStatement")
     public static BigDecimal div(double v1, double v2) {
         BigDecimal b1 = new BigDecimal(Double.toString(v1));
         BigDecimal b2 = new BigDecimal(Double.toString(v2));
