@@ -17,10 +17,6 @@ spring:
       connection-test-query: SELECT 1
       idle-timeout: 600000
       max-lifetime: 1800000
-  mvc:
-    view:
-      prefix: /
-      suffix: .jsp
 
 # Mybatis
 mybatis:

@@ -26,9 +26,9 @@
 	<div class="text-c">
 		<form class="Huiform" method="post" action="" target="_self">
 		    <tr>
-		     客户：<input type="text" name="" id="" placeholder=" " style="width:200px" class="input-text" style="width:120px;">
+		     客户：<input type="text" name="" id="" placeholder=" " class="input-text" style="width:120px;">
 	 &nbsp	 &nbsp	 &nbsp
-			 概要：<input type="text" name="" id="" placeholder=" " style="width:200px" class="input-text" style="width:120px;">
+			 概要：<input type="text" name="" id="" placeholder=" " style="width:200px" class="input-text" >
 	 &nbsp	 &nbsp	 &nbsp
 			 服务类型：<span class="select-box" style="width:80px">
 			<select class="select" name="brandclass" size="1">
@@ -152,7 +152,9 @@
 <script type="text/javascript" src="public/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
 $('.table-sort').dataTable({
-	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+	"aaSorting": [
+	    [ 1, "desc" ]
+	],//默认第几个排序
 	"bStateSave": true,//状态保存
 	"aoColumnDefs": [
 	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
