@@ -9,7 +9,7 @@ spring:
     hikari:
       jdbc-url: jdbc:mysql://localhost:3306/crm_?useUnicode=true&characterEncoding=utf8&useSSL=false
       username: root
-      password: root
+      password: 123456
       connection-timeout: 30000
       connection-init-sql: 2
       maximum-pool-size: 20
@@ -17,6 +17,10 @@ spring:
       connection-test-query: SELECT 1
       idle-timeout: 600000
       max-lifetime: 1800000
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
 
 # Mybatis
 mybatis:

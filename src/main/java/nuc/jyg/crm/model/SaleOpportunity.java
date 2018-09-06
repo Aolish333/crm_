@@ -42,4 +42,5 @@ public class SaleOpportunity {
     private Byte status;
 
     private Date updateTime;
+
 }

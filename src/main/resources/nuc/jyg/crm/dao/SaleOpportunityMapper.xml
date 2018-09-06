@@ -34,18 +34,18 @@
     delete from crm_sale_opportunity
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="nuc.jyg.crm.model.SaleOpportunity" >
-    insert into crm_sale_opportunity (id, number, source, 
+  <insert id="insert" parameterType="nuc.jyg.crm.model.SaleOpportunity">
+    insert into crm_sale_opportunity (id, number, source,
       customer_name, chance, summary, 
       contact, contact_phone, opportunity_description, 
       founder, create_time, owner, 
       assign_time, status, update_time
       )
-    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR},
       #{customerName,jdbcType=VARCHAR}, #{chance,jdbcType=TINYINT}, #{summary,jdbcType=VARCHAR}, 
       #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{opportunityDescription,jdbcType=VARCHAR}, 
-      #{founder,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{owner,jdbcType=VARCHAR}, 
-      #{assignTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}
+      #{founder,jdbcType=VARCHAR}, now(), #{owner,jdbcType=VARCHAR},
+      #{assignTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, now()
       )
   </insert>
   <insert id="insertSelective" parameterType="nuc.jyg.crm.model.SaleOpportunity" >
