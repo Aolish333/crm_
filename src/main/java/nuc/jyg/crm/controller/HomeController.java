@@ -1,9 +1,15 @@
 package nuc.jyg.crm.controller;
 
+import nuc.jyg.crm.common.Const;
 import nuc.jyg.crm.dao.CustomerMapper;
+import nuc.jyg.crm.model.SaleOpportunity;
+import nuc.jyg.crm.service.lxj.SalesAssignedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 /**
  * @author Ji YongGuang.
@@ -15,13 +21,19 @@ public class HomeController {
     @Autowired
     CustomerMapper customerMapper;
 
+    @Autowired
+    SalesAssignedService salesAssignedService;
+
     @GetMapping(value = {"", "/"})
     public String welcome() {
         return "index";
     }
 
     @GetMapping(value = "/sales")
-    public String sale() {
+    public String sale(Model model) {
+        List<SaleOpportunity> opportunityList =  salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode()));
+        System.out.println("*********************************\n"+opportunityList.toString());
+        model.addAttribute("allSales", opportunityList);
         return "sales-opportunity";
     }
 

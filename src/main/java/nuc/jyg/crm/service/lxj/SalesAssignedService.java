@@ -16,6 +16,13 @@ public interface SalesAssignedService {
 
     List <SaleOpportunity> querySaleOpportunityByStatus(Byte by_tatus);
 
-    ResponseCodeEnum AlterSalesAssigned();
+    ResponseCodeEnum alterSalesAssigned(SaleOpportunity saleOpportunity);
+
+    ResponseCodeEnum appointSalesAssigned(SaleOpportunity saleOpportunity);
+
+    ResponseCodeEnum dropSalesAssigned(SaleOpportunity saleOpportunity);
+
+    SaleOpportunity querySaleOpportunityById(int id);
+
 
 }

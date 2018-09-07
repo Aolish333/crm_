@@ -3,6 +3,8 @@ package nuc.jyg.crm.dao;
 import nuc.jyg.crm.model.SaleOpportunity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface SaleOpportunityMapper {
 
@@ -17,4 +19,6 @@ public interface SaleOpportunityMapper {
     int updateByPrimaryKeySelective(SaleOpportunity record);
 
     int updateByPrimaryKey(SaleOpportunity record);
+
+    List <SaleOpportunity> selectByStatus(Byte status);
 }

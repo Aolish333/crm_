@@ -12,33 +12,34 @@ import java.util.List;
  * User:Lee
  */
 public class ServiceServiceImpl implements ServiceService {
+
     @Override
-    public ResponseCodeEnum InquireServe() {
+    public ResponseCodeEnum inquireServe() {
         return null;
     }
 
     @Override
-    public ResponseCodeEnum CreateServing() {
+    public ResponseCodeEnum createServing() {
         return null;
     }
 
     @Override
-    public ResponseCodeEnum HandleServe() {
+    public ResponseCodeEnum handleServe() {
         return null;
     }
 
     @Override
-    public ResponseCodeEnum AssignServe() {
+    public ResponseCodeEnum assignServe() {
         return null;
     }
 
     @Override
-    public ResponseCodeEnum FeedBackServe() {
+    public ResponseCodeEnum feedBackServe() {
         return null;
     }
 
     @Override
-    public List<Service> FilingServe() {
+    public List <Service> filingServe() {
         return null;
     }
 }

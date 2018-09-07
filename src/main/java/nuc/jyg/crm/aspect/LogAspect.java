@@ -1,6 +1,7 @@
 package nuc.jyg.crm.aspect;
 
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.ObjectUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
@@ -35,7 +36,9 @@ public class LogAspect {
         StringBuffer argsBuffer = new StringBuffer();
         Object[] args = joinPoint.getArgs();
         for (int i = 0; i < args.length; i++) {
-            argsBuffer.append(String.format("目标方法的第%d个参数是:", (i + 1)) + args[i].toString() + " ");
+            if (ObjectUtils.allNotNull(args[i])) {
+                argsBuffer.append(String.format("目标方法的第%d个参数是:", (i + 1)) + args[i].toString() + " ");
+            }
         }
         log.info(argsBuffer.toString());
     }
@@ -43,6 +46,6 @@ public class LogAspect {
     @After(value = "controllerLog()")
     public void afterMethod() {
         executeLong = System.currentTimeMillis() - executeLong;
-        log.info("目标方法执行时间:{}",executeLong + "毫秒");
+        log.info("目标方法执行时间:{}", executeLong + "毫秒");
     }
 }

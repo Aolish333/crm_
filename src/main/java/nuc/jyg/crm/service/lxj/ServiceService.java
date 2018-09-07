@@ -11,10 +11,10 @@ import java.util.List;
  * User:Lee
  */
 public interface ServiceService {
-    ResponseCodeEnum InquireServe();
-    ResponseCodeEnum CreateServing();
-    ResponseCodeEnum HandleServe();
-    ResponseCodeEnum AssignServe();
-    ResponseCodeEnum FeedBackServe();
-    List<Service> FilingServe();
+    ResponseCodeEnum inquireServe();
+    ResponseCodeEnum createServing();
+    ResponseCodeEnum handleServe();
+    ResponseCodeEnum assignServe();
+    ResponseCodeEnum feedBackServe();
+    List<Service> filingServe();
 }
