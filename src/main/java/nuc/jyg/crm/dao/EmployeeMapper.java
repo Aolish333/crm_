@@ -3,6 +3,8 @@ package nuc.jyg.crm.dao;
 import nuc.jyg.crm.model.Employee;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface EmployeeMapper {
 
@@ -17,4 +19,7 @@ public interface EmployeeMapper {
     int updateByPrimaryKeySelective(Employee record);
 
     int updateByPrimaryKey(Employee record);
+
+    List<Employee> selectAllByRole(Integer role);
+
 }

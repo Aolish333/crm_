@@ -32,16 +32,23 @@ public class HomeController {
     @GetMapping(value = "/sales")
     public String sale(Model model) {
         List<SaleOpportunity> opportunityList =  salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode()));
-        System.out.println("*********************************\n"+opportunityList.toString());
         model.addAttribute("allSales", opportunityList);
         return "sales-opportunity";
     }
 
+    /**
+     * @return 客户开发计划
+     */
     @GetMapping(value = "/developingCustomer")
-    public String developingCustomer() {
+    public String developingCustomer(Model model) {
+        List<SaleOpportunity> opportunityList =  salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.ALLOCATED.getCode()));
+        model.addAttribute("allSales", opportunityList);
         return "customer-develop";
     }
 
+    /**
+     * @return 创建服务
+     */
     @GetMapping(value = "/createService")
     public String createService() {
         return "service-create";

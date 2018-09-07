@@ -42,8 +42,6 @@ public class SalesAssignedServiceImpl implements SalesAssignedService {
     @Override
     public List <SaleOpportunity> querySaleOpportunityByStatus(Byte by_tatus) {
         List <SaleOpportunity> saleOpportunities = saleOpportunityMapper.selectByStatus(by_tatus);
-        System.out.println("___________________________\n"+saleOpportunities.toString());
-
         return saleOpportunities;
     }
 

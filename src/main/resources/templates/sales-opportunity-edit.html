@@ -29,19 +29,19 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal" id="form-article-add">
+	<form th:action="@{/sale/opportunity/edit}" method="post" class="form form-horizontal" id="form-article-add">
 	
 	<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">编号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="sid" name="sid">
+				<input th:value="${allSale.number}" type="text" class="input-text" value="" placeholder="" id="sid" name="number">
 			</div>
 		</div>
 	
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">机会来源：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="opportunity" name="opportunity">
+				<input th:value="${allSale.source}" type="text" class="input-text" value="" placeholder="" id="opportunity" name="source">
 			</div>
 		</div>
 		
@@ -49,21 +49,21 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>客户名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="cname" name="cname">
+				<input th:value="${allSale.customerName}" type="text" class="input-text" value="" placeholder="" id="cname" name="customerName">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>成功几率：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="probability" name="probability">
+				<input th:value="${allSale.chance}" type="text" class="input-text" value="" placeholder="" id="probability" name="chance">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>概要：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="outline" name="outline">
+				<input th:value="${allSale.summary}" type="text" class="input-text" value="" placeholder="" id="outline" name="summary">
 			</div>
 		</div>
 		
@@ -71,20 +71,20 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">联系人：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="contacts" name="contacts">
+				<input th:value="${allSale.contact}" type="text" class="input-text" value="" placeholder="" id="contacts" name="contact">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">联系电话：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="tel" name="tel">
+				<input th:value="${allSale.contactPhone}" type="text" class="input-text" value="" placeholder="" id="tel" name="contactPhone">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>机会描述：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="abstract" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)"></textarea>
+				<textarea th:value="${allSale.opportunityDescription}" name="opportunityDescription" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)"></textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
 			</div>
 		</div>
@@ -92,26 +92,26 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>创建人：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="author" name="author">
+				<input th:value="${allSale.founder}" type="text" class="input-text" value="" placeholder="" id="author" name="founder">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>创建时间：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'createtime\')||\'%y-%M-%d\'}' })" id="createtime" name="createtime" class="input-text Wdate">
+				<input th:value="${allSale.createTime}" type="text" onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'createtime\')||\'%y-%M-%d\'}' })" id="createtime" name="createTime" class="input-text Wdate">
 			</div>
 		</div>
 
 		<div class="row cl">
 			<label  class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>指派给：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value=""  placeholder="" id="dispatcher" name="dispatcher">
+				<input th:value="${allSale.owner}" type="text" class="input-text" value=""  placeholder="" id="dispatcher" name="dispatcher">
 			</div>
 		</div>
 		<div class="row cl">
 			<label  class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>指派时间：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text"  onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'dispatchtime\')||\'%y-%M-%d\'}' })" id="dispatchtime" name="dispatchtime" class="input-text Wdate">
+				<input th:value="${allSale.assignTime}" type="text"  onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'dispatchtime\')||\'%y-%M-%d\'}' })" id="dispatchtime" name="dispatchtime" class="input-text Wdate">
 			</div>
 		</div>
 		<div class="row cl">
@@ -131,14 +131,14 @@
 <script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.js" th:src="@{/h-ui.admin/js/H-ui.admin.js}"></script> <!--/_footer /作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="public/My97DatePicker/4.8/WdatePicker.js"></script>
-<script type="text/javascript" src="public/jquery.validation/1.14.0/jquery.validate.js"></script>
-<script type="text/javascript" src="public/jquery.validation/1.14.0/validate-methods.js"></script>
-<script type="text/javascript" src="public/jquery.validation/1.14.0/messages_zh.js"></script>
-<script type="text/javascript" src="public/webuploader/0.1.5/webuploader.min.js"></script>
-<script type="text/javascript" src="public/ueditor/1.4.3/ueditor.config.js"></script>
-<script type="text/javascript" src="public/ueditor/1.4.3/ueditor.all.min.js"> </script>
-<script type="text/javascript" src="public/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="public/My97DatePicker/4.8/WdatePicker.js" th:src="@{/My97DatePicker/4.8/WdatePicker.js}"></script>
+<script type="text/javascript" src="public/jquery.validation/1.14.0/jquery.validate.js" th:src="@{/jquery.validation/1.14.0/jquery.validate.js}"></script>
+<script type="text/javascript" src="public/jquery.validation/1.14.0/validate-methods.js" th:src="@{/jquery.validation/1.14.0/validate-methods.js}"></script>
+<script type="text/javascript" src="public/jquery.validation/1.14.0/messages_zh.js" th:src="@{/jquery.validation/1.14.0/messages_zh.js}"></script>
+<script type="text/javascript" src="public/webuploader/0.1.5/webuploader.min.js" th:src="@{/webuploader/0.1.5/webuploader.min.js}"></script>
+<script type="text/javascript" src="public/ueditor/1.4.3/ueditor.config.js" th:src="@{/ueditor/1.4.3/ueditor.config.js}"></script>
+<script type="text/javascript" src="public/ueditor/1.4.3/ueditor.all.min.js" th:src="@{/ueditor/1.4.3/ueditor.all.min.js}"> </script>
+<script type="text/javascript" src="public/ueditor/1.4.3/lang/zh-cn/zh-cn.js" th:src="@{/ueditor/1.4.3/lang/zh-cn/zh-cn.js}"></script>
 <script type="text/javascript">
 $(function(){
 	$('.skin-minimal input').iCheck({

@@ -56,6 +56,7 @@ public class SalesAssignedController {
 
         /** 返回销售机会管理*/
         List<SaleOpportunity> opportunityList =  salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode()));
+
         model.addAttribute("allSales", opportunityList);
 
         return SALES_OPPORTUNITY;

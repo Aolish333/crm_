@@ -34,7 +34,7 @@
 	<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">编号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" readonly="true" value="001" placeholder="" id="sid" name="number">
+					<input type="text" class="input-text" readonly="true" value="001" placeholder="" id="sid" name="number">
 			</div>
 		</div>
 	
@@ -157,8 +157,8 @@
 <script type="text/javascript" src="/public/jquery.validation/1.14.0/messages_zh.js" th:src="@{jquery.validation/1.14.0/messages_zh.js}"></script>
 <script type="text/javascript" src="/public/webuploader/0.1.5/webuploader.min.js" th:src="@{webuploader/0.1.5/webuploader.min.js}"></script>
 <script type="text/javascript" src="/public/ueditor/1.4.3/ueditor.config.js" th:src="@{ueditor/1.4.3/ueditor.config.js}"></script>
-<script type="text/javascript" src="/public/ueditor/1.4.3/ueditor.all.min.js"> </script>
-<script type="text/javascript" src="/public/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="/public/ueditor/1.4.3/ueditor.all.min.js" th:src="@{/ueditor/1.4.3/ueditor.all.min.js}"> </script>
+<script type="text/javascript" src="/public/ueditor/1.4.3/lang/zh-cn/zh-cn.js" th:src="@{/ueditor/1.4.3/lang/zh-cn/zh-cn.js}" ></script>
 <script type="text/javascript">
 $(function(){
 	$('.skin-minimal input').iCheck({
