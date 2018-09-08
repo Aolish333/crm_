@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ServiceService {
     ResponseCodeEnum inquireServe();
-    ResponseCodeEnum createServing();
+    ResponseCodeEnum createServing(Service service);
     ResponseCodeEnum handleServe();
     ResponseCodeEnum assignServe();
     ResponseCodeEnum feedBackServe();

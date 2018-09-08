@@ -1,8 +1,10 @@
 package nuc.jyg.crm.service.lxj.impl;
 
 import nuc.jyg.crm.common.ResponseCodeEnum;
+import nuc.jyg.crm.dao.ServiceMapper;
 import nuc.jyg.crm.model.Service;
 import nuc.jyg.crm.service.lxj.ServiceService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ import java.util.List;
  * User:Lee
  */
 public class ServiceServiceImpl implements ServiceService {
+    @Autowired
+    ServiceMapper serviceMapper;
 
     @Override
     public ResponseCodeEnum inquireServe() {
@@ -19,8 +23,9 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public ResponseCodeEnum createServing() {
-        return null;
+    public ResponseCodeEnum createServing(Service service) {
+        serviceMapper.insertSelective(service);
+        return ResponseCodeEnum.SUCCESS;
     }
 
     @Override

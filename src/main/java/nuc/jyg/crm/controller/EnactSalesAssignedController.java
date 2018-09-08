@@ -28,6 +28,7 @@ public class EnactSalesAssignedController {
     /** 执行计划页面*/
     public static final String CUSTOMER_DEVELOP_EXECUTEPLAN = "customer-develop-executeplan";
 
+    /** 开发计划*/
     @GetMapping(value = "/toAppointPlan/{id}")
     public String toAppointPlan(Model model,@PathVariable Integer id) {
         SaleOpportunity saleOpportunity = saleOpportunityMaper.selectByPrimaryKey(id);
