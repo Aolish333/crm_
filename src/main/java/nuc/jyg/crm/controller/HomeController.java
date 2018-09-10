@@ -18,6 +18,11 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    /**
+     * 客户开发主页面
+     */
+    public static final String CUSTOMER_DEVELOP = "customer-develop";
+    public static final String SALES_OPPORTUNITY = "sales-opportunity";
     @Autowired
     CustomerMapper customerMapper;
 
@@ -33,7 +38,7 @@ public class HomeController {
     public String sale(Model model) {
         List<SaleOpportunity> opportunityList =  salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode()));
         model.addAttribute("allSales", opportunityList);
-        return "sales-opportunity";
+        return SALES_OPPORTUNITY;
     }
 
     /**
@@ -43,7 +48,7 @@ public class HomeController {
     public String developingCustomer(Model model) {
         List<SaleOpportunity> opportunityList =  salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.ALLOCATED.getCode()));
         model.addAttribute("allSales", opportunityList);
-        return "customer-develop";
+        return CUSTOMER_DEVELOP;
     }
 
     /**

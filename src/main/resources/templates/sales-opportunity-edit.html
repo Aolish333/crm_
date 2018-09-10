@@ -84,7 +84,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>机会描述：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<textarea th:value="${allSale.opportunityDescription}" name="opportunityDescription" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)"></textarea>
+				<textarea th:value="${allSale.opportunityDescription}" name="opportunityDescription" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,10)"></textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
 			</div>
 		</div>
@@ -116,9 +116,9 @@
 		</div>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+				<button  class="btn btn-primary radius" type="submit">保存</button>
 
-				<a class="btn btn-default radius" type="button" href="javascript:window.location.href ='sales-opportunity.html'">返回销售管理界面</a>
+				<a class="btn btn-default radius" th:href="@{/sales}" type="button" href="javascript:window.location.href ='sales-opportunity.html'">返回销售管理界面</a>
 			</div>
 		</div>
 	</form>
@@ -176,7 +176,7 @@ $(function(){
 		focusCleanup:true,
 		success:"valid",
 		submitHandler:function(form){
-			//$(form).ajaxSubmit();
+//			$(form).ajaxSubmit();
 			var index = parent.layer.getFrameIndex(window.name);
 			//parent.$('.btn-refresh').click();
 			parent.layer.close(index);

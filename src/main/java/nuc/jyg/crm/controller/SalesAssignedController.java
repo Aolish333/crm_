@@ -1,7 +1,6 @@
 package nuc.jyg.crm.controller;
 
 import nuc.jyg.crm.common.Const;
-import nuc.jyg.crm.common.ResponseCodeEnum;
 import nuc.jyg.crm.model.SaleOpportunity;
 import nuc.jyg.crm.service.lxj.SalesAssignedService;
 import nuc.jyg.crm.util.DateTimeUtil;
@@ -70,10 +69,10 @@ public class SalesAssignedController {
      * @return
      */
     @PostMapping(value = "/dispatch/{id}/{owner}/{assign_time}")
-    public ResponseCodeEnum dispatch(@PathVariable (value = "id") Integer id ,
+    public String dispatch(@PathVariable (value = "id") Integer id ,
                                      @PathVariable(value = "owner") String owner,
-                                     @PathVariable (value = "assign_time") String assign_time
-                                     ) {
+                                     @PathVariable (value = "assign_time") String assign_time,
+                           Model model ) {
         SaleOpportunity saleOpportunity = new SaleOpportunity();
         saleOpportunity.setOwner(owner);
         saleOpportunity.setId(id);
@@ -83,11 +82,16 @@ public class SalesAssignedController {
 
         salesAssignedService.alterSalesAssigned(saleOpportunity);
 
-        return ResponseCodeEnum.SUCCESS;
+        /** 返回销售机会管理*/
+        List<SaleOpportunity> opportunityList =  salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode()));
+
+        model.addAttribute("allSales", opportunityList);
+
+        return SALES_OPPORTUNITY;
     }
 
     @PostMapping(value = "/edit")
-    public ResponseCodeEnum edit(SaleOpportunity saleOpportunityPara) {
+    public String edit(SaleOpportunity saleOpportunityPara ,Model model) {
         SaleOpportunity saleOpportunity = new SaleOpportunity();
 
         saleOpportunity.setFounder(saleOpportunityPara.getFounder());
@@ -104,7 +108,12 @@ public class SalesAssignedController {
         saleOpportunity.setId(saleOpportunityPara.getId());
 
         salesAssignedService.alterSalesAssigned(saleOpportunity);
-        return ResponseCodeEnum.SUCCESS;
+
+        /** 返回销售机会管理*/
+        List<SaleOpportunity> opportunityList =  salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode()));
+
+        model.addAttribute("allSales", opportunityList);
+        return SALES_OPPORTUNITY;
     }
 
 }

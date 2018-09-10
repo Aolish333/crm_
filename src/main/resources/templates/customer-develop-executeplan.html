@@ -1,5 +1,7 @@
 <!--_meta 作为公共模版分离出去-->
-<!DOCTYPE HTML><html lang="zh-CN"      xmlns="http://www.w3.org/1999/xhtml"      xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:javascript="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -179,7 +181,7 @@
 				<td > <span  style="float:left;"><font size="2" >当前销售机会状态：</font></span><span  class="td-status label label-success radius" style="float:left;">已指派（开发中）</span></td>
 			    <td class="f-14 td-manage"><a style="text-decoration:none" class="btn btn-danger radius" onClick="article_stop(this)" href="javascript:;" ><i class="Hui-iconfont">&#xe631;</i>终止开发</a> <a style="text-decoration:none" class="btn btn-primary radius"  href="customer-develop-createplan.html" ><i class="Hui-iconfont">&#xe725;</i>制定计划</a> <a style="text-decoration:none" class="btn btn-success radius" onClick="article_shenhe(this)" href="javascript:;" ><i class="Hui-iconfont">&#xe6e1;</i>开发成功</a>
 				
-				<a class="btn btn-default radius" type="button" href="javascript:window.location.href ='customer-develop.html'">返回客户开发界面</a>
+				<a class="btn btn-default radius" type="button" th:href="@{/developingCustomer}" >返回客户开发界面</a>
 				
 				</td>
 				</tr>
@@ -213,8 +215,8 @@
 <script type="text/javascript" src="public/ueditor/1.4.3/ueditor.config.js" th:src="@{/ueditor/1.4.3/ueditor.config.js}"></script>
 <script type="text/javascript" src="public/ueditor/1.4.3/ueditor.all.min.js" th:src="@{/ueditor/1.4.3/ueditor.all.min.js}"> </script>
 <script type="text/javascript" src="public/ueditor/1.4.3/lang/zh-cn/zh-cn.js" th:src="@{/ueditor/1.4.3/lang/zh-cn/zh-cn.js}"></script>
-<script type="text/javascript" src="public/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="public/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/public/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="public/laypage/1.2/laypage.js" th:src="@{/laypage/1.2/laypage.js}"></script>
 <script type="text/javascript">
 $('.table-sort').dataTable({
 	"aaSorting": [

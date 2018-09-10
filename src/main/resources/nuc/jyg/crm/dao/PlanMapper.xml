@@ -29,7 +29,7 @@
       plan_result, create_time, update_time
       )
     values (#{id,jdbcType=INTEGER}, #{saleId,jdbcType=INTEGER}, #{planContent,jdbcType=VARCHAR}, 
-      #{planResult,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      #{planResult,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},now()
       )
   </insert>
   <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Plan" >
