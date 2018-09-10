@@ -56,12 +56,12 @@
     <select id="selectQuantityOfCustomerByGrade" resultType="int" parameterType="int">
         SELECT count(1)
         FROM crm_customer
-        WHERE credit = #{credit}
+        WHERE grade = #{grade}
     </select>
     <select id="selectQuantityOfCustomerByCredit" resultType="int" parameterType="int">
         SELECT count(1)
         FROM crm_customer
-        WHERE grade = #{grade}
+        WHERE credit = #{credit}
     </select>
     <select id="selectQuantityOfCustomerBySatisfaction" resultType="int" parameterType="int">
         SELECT count(1)

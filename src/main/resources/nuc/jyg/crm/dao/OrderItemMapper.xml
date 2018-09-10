@@ -30,7 +30,7 @@
         select
         <include refid="Base_Column_List"/>
         from crm_orderitem
-        where orderNo = #{orderNo}
+        where order_no = #{orderNo}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         DELETE FROM crm_orderitem

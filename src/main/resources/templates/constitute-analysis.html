@@ -35,14 +35,12 @@
         class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
     <div class="text-c">
-        <form class="Huiform" method="post" action="" target="_self">
+        <form class="Huiform" method="get" action="/report/constitute" target="_self">
             报表方式：<span class="select-box" style="width:150px">
-			<select class="select" name="brandclass" size="1">
-				<option value="0" selected>按等级</option>
-				<option value="1">按信用度</option>
-				<option value="2">按满意度</option>
-		
-				
+			<select class="select" name="manner" size="1">
+				<option th:selected="${manner eq manners}" th:each="manners:${mannerList}" th:value="${manners}"
+                        th:text="${manners}">按等级
+                </option>
 			</select>
 			</span>
             <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 查询</button>
@@ -55,43 +53,17 @@
         <tr class="text-c">
             <th width="25"><input type="checkbox" name="" value=""></th>
             <th width="70">编号</th>
-            <th width="80">等级</th>
+            <th width="80" th:text="${manner}" >等级</th>
             <th width="200">客户数量</th>
-
         </tr>
         </thead>
         <tbody>
-        <tr class="text-c">
+        <tr class="text-c" th:each="target:${result}">
             <td><input name="" type="checkbox" value=""></td>
-            <td>1</td>
-            <td>战略合作伙伴</td>
-            <td>12</td>
+            <td th:text="${target.getKey()}"></td>
+            <td th:text="${target.getValue().getKey()}"></td>
+            <td th:text="${target.getValue().getValue()}"></td>
         </tr>
-        <tr class="text-c">
-            <td><input name="" type="checkbox" value=""></td>
-            <td>2</td>
-            <td>合作伙伴</td>
-            <td>26</td>
-        </tr>
-        <tr class="text-c">
-            <td><input name="" type="checkbox" value=""></td>
-            <td>3</td>
-            <td>大客户</td>
-            <td>38</td>
-        </tr>
-        <tr class="text-c">
-            <td><input name="" type="checkbox" value=""></td>
-            <td>4</td>
-            <td>重点开发客户</td>
-            <td>6</td>
-        </tr>
-        <tr class="text-c">
-            <td><input name="" type="checkbox" value=""></td>
-            <td>5</td>
-            <td>普通客户</td>
-            <td>72</td>
-        </tr>
-
         </tbody>
     </table>
 </div>

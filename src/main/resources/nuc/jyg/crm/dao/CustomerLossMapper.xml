@@ -26,24 +26,23 @@
         from crm_customer_loss
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="selectCustomerByManagerName" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-        <include refid="Base_Column_List"/>
-        from crm_customer_loss
-        where managerName = #{managerName}
-    </select>
     <select id="selectCusByCusNameAndManName" resultMap="BaseResultMap" parameterType="map">
         select
         <include refid="Base_Column_List"/>
         from crm_customer_loss
-        where managerName = #{managerName}
-        and customerName = #{customerName}
-    </select>
-    <select id="selectCusAndManByName" resultMap="BaseResultMap" parameterType="string">
-        select
-        <include refid="Base_Column_List"/>
-        from crm_customer_loss
-        where customerName = #{customerName}
+        <where>
+            <if test="customerName != null">
+                <bind name="name" value="'%'+customerName+'%'"/>
+                AND customer_name like #{name}
+            </if>
+            <if test="managerName != null">
+                <bind name="manage" value="'%'+managerName+'%'"/>
+                AND customer_manager like #{manage}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         DELETE FROM crm_customer_loss

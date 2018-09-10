@@ -4,12 +4,15 @@ import nuc.jyg.crm.common.Const;
 import nuc.jyg.crm.dao.CustomerLossMapper;
 import nuc.jyg.crm.dao.CustomerMapper;
 import nuc.jyg.crm.dao.OrderMapper;
+import nuc.jyg.crm.dao.ServiceMapper;
 import nuc.jyg.crm.model.Customer;
+import nuc.jyg.crm.model.CustomerLoss;
 import nuc.jyg.crm.model.Order;
 import nuc.jyg.crm.model.OrderItem;
 import nuc.jyg.crm.service.hikari.IOrderService;
 import nuc.jyg.crm.service.hikari.IReportService;
 import nuc.jyg.crm.util.BigDecimalUtil;
+import nuc.jyg.crm.vo.CustomerLossVO;
 import nuc.jyg.crm.vo.CustomerVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -28,13 +31,14 @@ import java.util.*;
 @Service(value = "iReportService")
 public class ReportServiceImpl implements IReportService {
 
-    private static final String ALL_YEARS = "全部";
-
     @Autowired
     private IOrderService iOrderService;
 
     @Autowired
     private CustomerMapper customerMapper;
+
+    @Autowired
+    private ServiceMapper serviceMapper;
 
     @Autowired
     private CustomerLossMapper customerLossMapper;
@@ -67,7 +71,7 @@ public class ReportServiceImpl implements IReportService {
         // K -用户 V -订单列表
         if (CollectionUtils.isNotEmpty(customerArrayList)) {
             for (Customer targetCustomer : customerArrayList) {
-                if (StringUtils.equals(ALL_YEARS, years)) {
+                if (StringUtils.equals(Const.ServiceYearEnum.YEAR_ALL.getValue(), years)) {
                     orderArrayList = orderMapper.selectByCustomerIdAndStatus(targetCustomer.getId(), Const
                             .PaymentStatusEnum
                             .ALREADY_PAID);
@@ -152,6 +156,23 @@ public class ReportServiceImpl implements IReportService {
         return map;
     }
 
+    @Override
+    public Map<String, Integer> getServices(String year) {
+        Map<String, Integer> map = new HashMap<String, Integer>(5, 0.75f);
+        Const.ServiceTypeEnum[] serviceTypeEnums = Const.ServiceTypeEnum.values();
+        for (Const.ServiceTypeEnum targetServiceTypeEnum :
+                serviceTypeEnums) {
+            // [ "咨询":30,"建议":27 ..]
+            final String way = targetServiceTypeEnum.getValue();
+            if (!StringUtils.equals(year, Const.ServiceYearEnum.YEAR_ALL.getValue())) {// 全部
+                map.put(way, serviceMapper.selectCountByYear(year, way));
+            } else {
+                map.put(way, serviceMapper.selectCountByYear(null, way));
+            }
+        }
+        return map;
+    }
+
     /**
      * 查看已经确认流失的客户流失记录
      * <p>
@@ -163,44 +184,31 @@ public class ReportServiceImpl implements IReportService {
      * @return
      */
     @Override
-    public Map<String, CustomerVO> getCustomerLoss(String username, String manager) throws SQLException {
-        Map<String, CustomerVO> map = new HashMap<String, CustomerVO>(10, 0.75f);
-        ArrayList<Customer> customerArrayList = null;
+    public ArrayList<CustomerLossVO> getCustomerLoss(String username, String manager) throws SQLException {
+        ArrayList<CustomerLoss> customerLosses = null;
 
-        final boolean doubleNull = StringUtils.isBlank(username) && StringUtils.isBlank(manager);
-        final boolean usernameNotNull = StringUtils.isNotBlank(username) && StringUtils.isBlank(manager);
-        final boolean managerNotNull = StringUtils.isNotBlank(manager) && StringUtils.isBlank(username);
-        final boolean doubleNotNull = StringUtils.isNotBlank(username) && StringUtils.isNotBlank(manager);
-
-        // username = null & manager != null
-        if (managerNotNull) {
-            customerArrayList = customerLossMapper.selectCustomerByManagerName(manager);
-        }
-
-        // 两者都不为null
-        if (doubleNotNull) {
-            customerArrayList = customerLossMapper.selectCusByCusNameAndManName(username, manager);
-        }
-
-        // username != null & manager = null 和 两者都为 null
-        if (doubleNull || usernameNotNull) {
-            customerArrayList = customerLossMapper.selectCusAndManByName(username);
-        }
+        customerLosses = customerLossMapper.selectCusByCusNameAndManName(username, manager, Const.CustomerLossStatus
+                .CONFIRM_LOSS);
 
         // 已确认流失的客户集合
-        for (Customer targetCustomer :
-                customerArrayList) {
-            CustomerVO customerVO = assembleCustomerVO(targetCustomer);
+        ArrayList<CustomerLossVO> customerLossVOS = new ArrayList<>(10);
+        for (CustomerLoss targetCustomerLoss :
+                customerLosses) {
+            int customerId = customerMapper.selectByName(targetCustomerLoss.getCustomerName()).get(0).getId();
+            CustomerLossVO customerLossVO = assembleCustomerLossVO(targetCustomerLoss);
+            customerLossVO.setId(customerId);
+
             // TODO Years 客户最后一次下单记录
-            Order lastOrder = iOrderService.selectLastOrdersByCustomerId(targetCustomer.getId());
+            Order lastOrder = iOrderService.selectLastOrdersByCustomerId(customerId);
             if (lastOrder.getId() != 0) {
                 String lastOrderTime = lastOrder.getUpdateTime().toString();
                 lastOrderTime = lastOrderTime.substring(lastOrderTime.length() - 4, lastOrderTime.length());
-                map.put(lastOrderTime, customerVO);
+                customerLossVO.setYear(lastOrderTime);
+                customerLossVOS.add(customerLossVO);
             }
         }
 
-        return map;
+        return customerLossVOS;
     }
 
     private CustomerVO assembleCustomerVO(Customer customer) throws SQLException {
@@ -215,6 +223,18 @@ public class ReportServiceImpl implements IReportService {
         customerVO.setLossReason(causeOfLossEnums[random.nextInt(enumLength)].getValue());
 
         return customerVO;
+    }
+
+    private CustomerLossVO assembleCustomerLossVO(CustomerLoss customerLoss) throws SQLException {
+        CustomerLossVO customerLossVO = new CustomerLossVO();
+        customerLossVO.setCustomerName(customerLoss.getCustomerName());
+        customerLossVO.setManagerName(customerLoss.getCustomerManager());
+
+        Const.CauseOfLossEnum[] causeOfLossEnums = Const.CauseOfLossEnum.values();
+        Random random = new Random();
+        final int enumLength = causeOfLossEnums.length;
+        customerLossVO.setLossReason(causeOfLossEnums[random.nextInt(enumLength)].getValue());
+        return customerLossVO;
     }
 
 }

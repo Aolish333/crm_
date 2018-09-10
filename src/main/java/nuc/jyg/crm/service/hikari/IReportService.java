@@ -1,9 +1,11 @@
 package nuc.jyg.crm.service.hikari;
 
 
+import nuc.jyg.crm.vo.CustomerLossVO;
 import nuc.jyg.crm.vo.CustomerVO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +40,9 @@ public interface IReportService {
      * @param manager 客户经理名称
      * @return 返回 客户流失信息
      */
-    Map<String, CustomerVO> getCustomerLoss(String username, String manager) throws SQLException;
+    ArrayList<CustomerLossVO> getCustomerLoss(String username, String manager) throws SQLException;
+
+
+    Map<String, Integer> getServices(String year);
 
 }
