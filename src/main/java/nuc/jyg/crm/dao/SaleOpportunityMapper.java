@@ -21,4 +21,7 @@ public interface SaleOpportunityMapper {
     int updateByPrimaryKey(SaleOpportunity record);
 
     List <SaleOpportunity> selectByStatus(Byte status);
+
+    SaleOpportunity selectByNumber(Integer id);
+
 }

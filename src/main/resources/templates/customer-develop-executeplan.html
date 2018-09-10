@@ -110,7 +110,7 @@
 				<td th:text="${allSale.assignTime}"><span style="float:left;"></span></td>
 
 			</tr>
-
+		</table>
 	</div>
 
 	<!--结束-->
@@ -122,8 +122,8 @@
 	<div class="mt-20">
 	<form class="form form-horizontal" id="form-article-add">
 
-	
-	
+
+
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-bg table-hover  table-responsive">
 			<thead>
@@ -132,36 +132,31 @@
 					<th width="100">日期</th>
 					<th width="200">计划</th>
 					<th>执行效果</th>
-					
+
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="text-c">
+
+				<tr class="text-c" th:each="allPlan : ${allPlans}">
+					<form th:action="@{/updataPlan}" th:object="${plan}" method="post">
+
 					<td><input type="checkbox" value="" name=""></td>
-					<td>10001</td>
-					<td>10001</td>
-			     	<td class="f-14 td-manage">
-                       <div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="mobile" name="mobile">
-			</div>
-				 <button onClick="article_save();" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>  </td>
+					<input  type="hidden" th:value="${allPlan.id}"  name="id" id="id">
+					<input  type="hidden" th:value="${allPlan.saleId}"  name="saleId" id="saleId">
+					<td th:text="${allPlan.createTime}"  name="createTime" type="text"></td>
+					<td th:text="${allPlan.planContent}" ></td>
+					<td class="f-14 td-manage">
+						<div class="formControls col-xs-8 col-sm-9">
+							<input  class="input-text" type="text" name="planResult">
+						</div>
+						<button onClick="article_save();" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>  </td>
+					</form>
 				</tr>
-				<tr class="text-c">
-					<td><input type="checkbox" value="" name=""></td>
-					<td>10001</td>
-					<td>10001</td>
-			     	<td class="f-14 td-manage">
-                       <div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="mobile" name="mobile">
-			</div>
-				 <button onClick="article_save();" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>  </td>
-				</tr>
-				
-				
-				
+
+
 			</tbody>
 		</table>
-		
+
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 			<span style="text-align: right;display:block;">
@@ -169,7 +164,7 @@
 			</span>
 			</div>
 		</div>
-		
+
 	</div>
 			<br>
 	<div class="mt-20">
@@ -177,27 +172,69 @@
 			<span style="text-align: right;display:block;">
 			<table>
 			<tr>
-			
+
 				<td > <span  style="float:left;"><font size="2" >当前销售机会状态：</font></span><span  class="td-status label label-success radius" style="float:left;">已指派（开发中）</span></td>
 			    <td class="f-14 td-manage"><a style="text-decoration:none" class="btn btn-danger radius" onClick="article_stop(this)" href="javascript:;" ><i class="Hui-iconfont">&#xe631;</i>终止开发</a> <a style="text-decoration:none" class="btn btn-primary radius"  href="customer-develop-createplan.html" ><i class="Hui-iconfont">&#xe725;</i>制定计划</a> <a style="text-decoration:none" class="btn btn-success radius" onClick="article_shenhe(this)" href="javascript:;" ><i class="Hui-iconfont">&#xe6e1;</i>开发成功</a>
-				
+
 				<a class="btn btn-default radius" type="button" th:href="@{/developingCustomer}" >返回客户开发界面</a>
-				
+
 				</td>
 				</tr>
-				
+
 				</table>
 		</span>
-		
-		
-		
-		
-		
-		
-			
+
+
+
+
+
+
+
 			</div>
 
 	</form>
+
+
+
+
+		<!--<div class="mt-20">-->
+			<!--<form action="">-->
+				<!--<table class="table table-border table-bordered table-bg table-hover  table-responsive">-->
+					<!--<thead>-->
+					<!--<tr class="text-c">-->
+
+						<!--<th width="100">日期</th>-->
+						<!--<th width="200">计划</th>-->
+						<!--<th>执行效果</th>-->
+						<!--<th width="100">操作</th>-->
+
+					<!--</tr>-->
+					<!--</thead>-->
+					<!--<tbody>-->
+					<!--<tr class="text-c">-->
+
+						<!--<td>100</td>-->
+						<!--<td>280</td>-->
+						<!--<td>100</td>-->
+
+						<!--<td><a class="modify" href="javascript:;">修改</a></td>-->
+					<!--</tr>-->
+
+
+
+					<!--</tbody>-->
+				<!--</table>-->
+
+				<!--<div class="row cl">-->
+					<!--<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">-->
+			<!--<span style="text-align: right;display:block;">-->
+				<!--<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>-->
+			<!--</span>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</form>-->
+		<!--</div>-->
+</div>
 </article>
 
 <!--_footer 作为公共模版分离出去-->
@@ -215,20 +252,51 @@
 <script type="text/javascript" src="public/ueditor/1.4.3/ueditor.config.js" th:src="@{/ueditor/1.4.3/ueditor.config.js}"></script>
 <script type="text/javascript" src="public/ueditor/1.4.3/ueditor.all.min.js" th:src="@{/ueditor/1.4.3/ueditor.all.min.js}"> </script>
 <script type="text/javascript" src="public/ueditor/1.4.3/lang/zh-cn/zh-cn.js" th:src="@{/ueditor/1.4.3/lang/zh-cn/zh-cn.js}"></script>
-<script type="text/javascript" src="/public/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/datatables/1.10.0/jquery.dataTables.min.js" th:src="@{/datatables/1.10.0/jquery.dataTables.min.js}" ></script>
 <script type="text/javascript" src="public/laypage/1.2/laypage.js" th:src="@{/laypage/1.2/laypage.js}"></script>
+		<script type="text/javascript" th:src="@{/js/app.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
 <script type="text/javascript">
-$('.table-sort').dataTable({
-	"aaSorting": [
-	    [ 1, "desc" ]
-	],//默认第几个排序
-	"bStateSave": true,//状态保存
-	"pading":false,
-	"aoColumnDefs": [
-	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-	  {"orderable":false,"aTargets":[0,8]}// 不参与排序的列
-	]
-});
+
+    $('.table-sort').dataTable({
+        "aaSorting": [
+            [ 1, "desc" ]
+		],//默认第几个排序
+        "bStateSave": true,//状态保存
+        "pading":false,
+        "aoColumnDefs": [
+            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+            {"orderable":false,"aTargets":[0,8]}// 不参与排序的列
+        ]
+    });
+
+    /*实时保存*/
+    $(function(){
+        $(".modify").click(function() {
+            str = $(this).text()=="修改"?"确定":"修改";
+            $(this).text(str);   // 按钮被点击后，在“编辑”和“确定”之间切换
+            $(this).parent().siblings("td:eq(2)").each(function() {  // 获取当前行的第三列单元格
+                obj_text = $(this).find("input:text");    // 判断单元格下是否有文本框
+                if(!obj_text.length)   // 如果没有文本框，则添加文本框使之可以编辑
+                    $(this).html("<input type='text' class=' input-text'style='width:1000px' value='"+$(this).text()+"'>");
+                else   // 如果已经存在文本框，则将其显示为文本框修改的值
+                    $(this).html(obj_text.val());
+            });
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+    <!---->
+
 
 /*资讯-添加*/
 function article_add(title,url,w,h){

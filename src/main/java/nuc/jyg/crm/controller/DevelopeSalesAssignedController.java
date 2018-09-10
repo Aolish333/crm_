@@ -41,8 +41,7 @@ public class DevelopeSalesAssignedController {
     @PostMapping(value = "/enactPlan" )
     public String enactPlan(Model model, Plan plan) {
         planMapper.insertSelective(plan);
-//        SaleOpportunity saleOpportunity = saleOpportunityMaper.selectByPrimaryKey(id);
-//        model.addAttribute("allSale", saleOpportunity);
+//        错误
         return CUSTOMER_DEVELOP;
     }
     /** 根据计划ID添加执行效果 */
@@ -65,7 +64,7 @@ public class DevelopeSalesAssignedController {
         return CUSTOMER_DEVELOP_EXECUTEPLAN;
     }
 
-    /** -》开发成功 */
+    /** -》开发失败 */
     @GetMapping(value = "/toDevelopFalse/{id}" )
     public String toDevelopFalse(Model model,@PathVariable Integer id){
         SaleOpportunity saleOpportunity = new SaleOpportunity();
@@ -74,7 +73,5 @@ public class DevelopeSalesAssignedController {
         saleOpportunityMapper.updateByPrimaryKeySelective(saleOpportunity);
         return CUSTOMER_DEVELOP_EXECUTEPLAN;
     }
-
-
 
 }

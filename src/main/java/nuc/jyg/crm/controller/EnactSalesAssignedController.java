@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 指定开发计划
  */
@@ -39,21 +42,27 @@ public class EnactSalesAssignedController {
     public static final String CUSTOMER_DEVELOP_EXECUTEPLAN = "customer-develop-executeplan";
 
     /** 跳到—》开发计划*/
-    @GetMapping(value = "/toAppointPlan/{id}")
-    public String toAppointPlan(Model model,@PathVariable Integer id) {
-        SaleOpportunity saleOpportunity = saleOpportunityMaper.selectByPrimaryKey(id);
+    @GetMapping(value = "/toAppointPlan/{number}")
+    public String toAppointPlan(Model model,@PathVariable String number) {
+        SaleOpportunity saleOpportunity = saleOpportunityMaper.selectByNumber(Integer.valueOf(number));
+        model.addAttribute("allPlans",returnList(Integer.parseInt(number)));
         model.addAttribute("allSale", saleOpportunity);
         return CUSTOMER_DEVELOP_CREATEPLAN;
     }
 
     /** 跳到—》执行计划页面*/
-        @GetMapping(value = "/toExecutePlan/{id}" )
-    public String toExecutePlan(Model model,@PathVariable Integer id) {
-            SaleOpportunity saleOpportunity = saleOpportunityMaper.selectByPrimaryKey(id);
+        @GetMapping(value = "/toExecutePlan/{number}" )
+    public String toExecutePlan(Model model ,@PathVariable String number) {
+            SaleOpportunity saleOpportunity = saleOpportunityMaper.selectByNumber(Integer.valueOf(number));
+            model.addAttribute("allPlans",returnList(Integer.parseInt(number)));
             model.addAttribute("allSale", saleOpportunity);
         return CUSTOMER_DEVELOP_EXECUTEPLAN;
     }
 
-
+    /** 添加sid的计划*/
+    public List<Plan> returnList(int sid){
+        List <Plan> plans = planMapper.selectBySid(sid);
+        return plans;
+    }
 
 }

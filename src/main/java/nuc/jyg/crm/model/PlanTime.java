@@ -2,16 +2,18 @@ package nuc.jyg.crm.model;
 
 import lombok.*;
 
-import java.util.Date;
-
+/**
+ * @author aolish333@gmail.com
+ * @date 2018/9/10 15:28
+ * User:Lee
+ */
 @ToString
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Plan {
-
-    private Integer id;
+public class PlanTime {
+    private String  createTime;
 
     private Integer saleId;
 
@@ -19,7 +21,9 @@ public class Plan {
 
     private String planResult;
 
-    private Date createTime;
+    /**
+     * 销售ID
+     */
+    private String id;
 
-    private Date updateTime;
 }

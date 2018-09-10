@@ -81,10 +81,10 @@
 					</div>
 					<td class="f-14 td-manage">
 						<a  class="btn btn-primary radius" style="text-decoration:none"  onClick="article_edit('','customer-develop-createplan.html','10001')" href="javascript:;"
-							th:href="@{/toAppointPlan/{id}(id=${allSale.id})}"
+							th:href="@{/toAppointPlan/{number}(number=${allSale.number})}"
 							title="制定计划">
 							<i class="Hui-iconfont">&#xe725;</i>制定计划</a> &nbsp;&nbsp;&nbsp;&nbsp;
-						<a th:href="@{/toExecutePlan/{id}(id=${allSale.id})}" class="btn btn-primary radius" style="text-decoration:none"  onClick="article_edit('','customer-develop-executeplan.html')" href="javascript:;" title="执行计划"><i class="Hui-iconfont">&#xe726;</i>执行计划</a></td>
+						<a th:href="@{/toExecutePlan/{number}(number=${allSale.number})}" class="btn btn-primary radius" style="text-decoration:none"  onClick="article_edit('','customer-develop-executeplan.html')" href="javascript:;" title="执行计划"><i class="Hui-iconfont">&#xe726;</i>执行计划</a></td>
 
 				</tr>
 

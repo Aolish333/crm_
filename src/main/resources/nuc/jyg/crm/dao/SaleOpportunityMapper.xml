@@ -29,7 +29,7 @@
     select 
     <include refid="Base_Column_List" />
     from crm_sale_opportunity
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{saleId,jdbcType=INTEGER}
   </select>
 
   <select  id="selectByStatus" resultMap="BaseResultMap" parameterType="java.lang.Byte" >
@@ -37,6 +37,15 @@
     <include refid="Base_Column_List" />
     from crm_sale_opportunity
     where status = #{status,jdbcType=INTEGER}
+  </select>
+
+
+
+  <select  id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from crm_sale_opportunity
+    where number = #{number,jdbcType=INTEGER}
   </select>
 
 

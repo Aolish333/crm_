@@ -7,15 +7,17 @@ package nuc.jyg.crm.controller;
  */
 
 import nuc.jyg.crm.dao.PlanMapper;
+import nuc.jyg.crm.dao.SaleOpportunityMapper;
 import nuc.jyg.crm.model.Plan;
+import nuc.jyg.crm.model.PlanTime;
 import nuc.jyg.crm.model.SaleOpportunity;
 import nuc.jyg.crm.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 执行开发计划
@@ -25,6 +27,9 @@ public class ExecuteSalesAssignedController {
 
     @Autowired
     PlanMapper planMapper;
+
+    @Autowired
+    SaleOpportunityMapper saleOpportunityMapper;
 
     /**
      * 客户开发主页面
@@ -41,32 +46,33 @@ public class ExecuteSalesAssignedController {
      * */
     @PostMapping(value = "/executePlan" )
     public String executePlan(Model model, SaleOpportunity saleOpportunity) {
+
         return CUSTOMER_DEVELOP;
     }
 
     /** 根据销售ID新建计划 */
-    @GetMapping(value = "/createPlanBySaleId/{sid}/{createTime}/{planContent}")
-    public String createPlanBySaleId(Model model,
-                                     @PathVariable Integer sid,
-                                     @PathVariable String createTime,
-                                     @PathVariable String planContent){
+    @RequestMapping(value = "/createPlanBySaleId", method=RequestMethod.POST)
+    public String createPlanBySaleId(Model model,PlanTime planTime) throws Exception{
         Plan plan = new Plan();
-        plan.setSaleId(sid);
-        plan.setCreateTime(DateTimeUtil.strToDates(createTime));
-        plan.setPlanContent(planContent);
+        plan.setSaleId(planTime.getSaleId());
+        plan.setCreateTime(DateTimeUtil.strToDates(planTime.getCreateTime()));
+        plan.setPlanContent(planTime.getPlanContent());
         planMapper.insert(plan);
+        SaleOpportunity saleOpportunity = saleOpportunityMapper.selectByNumber(planTime.getSaleId());
+        model.addAttribute("allPlans",returnList(plan.getSaleId()));
+        model.addAttribute("allSale", saleOpportunity);
         return CUSTOMER_DEVELOP_CREATEPLAN;
     }
 
     /** 根据计划ID修改计划项 */
-    @GetMapping(value = "/updataPlan/{id}/{planContent}")
-    public String updataPlan(Model model,
-                             @PathVariable Integer id,
-                             @PathVariable String planContent){
-        Plan plan = new Plan();
-        plan.setPlanContent(planContent);
-        plan.setSaleId(id);
-        planMapper.updateByPrimaryKey(plan);
+    @PostMapping(value = "/updataPlan")
+    public String updataPlan(Model model,@ModelAttribute Plan plan){
+
+        planMapper.updateByPrimaryKeySelective(plan);
+        System.out.println("__________"+plan.toString());
+        SaleOpportunity saleOpportunity = saleOpportunityMapper.selectByNumber(plan.getSaleId());
+        model.addAttribute("allPlans",returnList(plan.getSaleId()));
+        model.addAttribute("allSale", saleOpportunity);
         return CUSTOMER_DEVELOP_CREATEPLAN;
     }
 
@@ -75,16 +81,18 @@ public class ExecuteSalesAssignedController {
     @GetMapping(value = "/deletePlan/{id}")
     public String deletePlan(Model model,
                              @PathVariable Integer id){
+        Plan plan = planMapper.selectByPrimaryKey(id);
+        SaleOpportunity saleOpportunity = saleOpportunityMapper.selectByNumber(plan.getSaleId());
         planMapper.deleteByPrimaryKey(id);
+        model.addAttribute("allPlans",returnList(plan.getSaleId()));
+        model.addAttribute("allSale", saleOpportunity);
         return CUSTOMER_DEVELOP_CREATEPLAN;
     }
 
-//    /** 返回客户页面 */
-//    @PostMapping(value = "/to")
-//    public String deletePlan(Model model){
-//        return "CUSTOMER_DEVELOP";
-//    }
-
-
+    /** 添加sid的计划*/
+    public List<Plan> returnList(int sid){
+        List <Plan> plans = planMapper.selectBySid(sid);
+        return plans;
+    }
 
 }
