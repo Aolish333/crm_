@@ -35,8 +35,9 @@
         class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
     <div class="text-c">
-        <form class="Huiform" method="get" action="/report/contribution" target="_self">
-            客户名称：<input th:value="${customerName}" type="text" name="customerName" id="" placeholder=" " style="width:250px"
+        <form id="myForm" class="Huiform" method="get" action="/report/contribution" target="_self">
+            客户名称：<input th:value="${customerName}" type="text" name="customerName" id="" placeholder=" "
+                        style="width:250px"
                         class="input-text">
             &nbsp &nbsp &nbsp
             年份：<span class="select-box" style="width:150px">
@@ -49,6 +50,9 @@
 			</select>
 			</span>
             <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 查询</button>
+            <a name="" id="" class="btn btn-warning" href="/report/page/contribution">
+                <i class="Hui-iconfont">&#xe618;</i>报表
+            </a>
         </form>
     </div>
     共有数据：<strong>54</strong> 条</span> </div>

@@ -112,6 +112,8 @@ public final class Const {
     @Getter
     public enum CustomerCreditEnum {
 
+        CREDIT_ONE_STARS(1, "一颗星"),
+        CREDIT_TWO_STARS(2, "二颗星"),
         CREDIT_THREE_STARS(3, "三颗星"),
         CREDIT_FOUR_STARS(4, "四颗星"),
         Credit_FIVE_STARS(5, "五颗星");
