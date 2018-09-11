@@ -4,10 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import nuc.jyg.crm.common.Const;
+import nuc.jyg.crm.model.Customer;
+import nuc.jyg.crm.service.hikari.ICustomerService;
 import nuc.jyg.crm.service.hikari.IReportService;
 import nuc.jyg.crm.vo.ConstituteEchartsVO;
 import nuc.jyg.crm.vo.CustomerLossVO;
 import nuc.jyg.crm.vo.CustomerVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +39,9 @@ public class ReportController {
     @Autowired
     private IReportService iReportService;
 
+    @Autowired
+    private ICustomerService iCustomerService;
+
     @GetMapping(value = "/contribution")
     public String getContributions(@RequestParam(value = "year", required = true, defaultValue = "全部") String year,
                                    String customerName, Model model) throws SQLException {
@@ -43,8 +49,17 @@ public class ReportController {
         ArrayList<CustomerVO> customerVOS = (ArrayList<CustomerVO>) iReportService.getCustomerContribution
                 (customerName, year);
 
+        ArrayList<String> years = new ArrayList<>();
+        Const.ServiceYearEnum[] serviceYearEnums = Const.ServiceYearEnum.values();
+        for (Const.ServiceYearEnum serviceYearEnum :
+                serviceYearEnums) {
+            years.add(serviceYearEnum.getValue());
+        }
+
         model.addAttribute("customerVOS", customerVOS);
         model.addAttribute("customerName", customerName);
+        model.addAttribute("years", years);
+        model.addAttribute("year", year);
 
         // todo 填充contribution的echarts全局内容
         Map<String, ArrayList<String>> report = new HashMap<>();
@@ -232,5 +247,22 @@ public class ReportController {
         method_response.put("satisfaction", constituteEchartsVOS);
         log.info(objectMapper.writeValueAsString(method_response.get("satisfaction")));
         return objectMapper.writeValueAsString(method_response.get("satisfaction"));
+    }
+
+    @RequestMapping(value = "/page/detail")
+    public String constituteDetail(String level, Model model) {
+
+        int levelInt = 0;
+        Const.CustomerGradeEnum[] customerGradeEnums = Const.CustomerGradeEnum.values();
+        for (Const.CustomerGradeEnum cause : customerGradeEnums) {
+            if (StringUtils.equals(cause.getValue(), level)) {
+                levelInt = cause.getCode();
+            }
+        }
+        ArrayList<Customer> customers = iCustomerService.selectByLeval(levelInt);
+
+        model.addAttribute("level", level);
+        model.addAttribute("customers", customers);
+        return "customer-constitute";
     }
 }

@@ -53,20 +53,31 @@
         <include refid="Base_Column_List"/>
         from crm_customer
     </select>
-    <select id="selectQuantityOfCustomerByGrade" resultType="int" parameterType="int">
+    <select id="queryList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from crm_customer
+    </select>
+    <select id="selectQuantityOfCustomerByGrade" resultType="java.lang.Integer" parameterType="int">
         SELECT count(1)
         FROM crm_customer
         WHERE grade = #{grade}
     </select>
-    <select id="selectQuantityOfCustomerByCredit" resultType="int" parameterType="int">
+    <select id="selectQuantityOfCustomerByCredit" resultType="java.lang.Integer" parameterType="int">
         SELECT count(1)
         FROM crm_customer
         WHERE credit = #{credit}
     </select>
-    <select id="selectQuantityOfCustomerBySatisfaction" resultType="int" parameterType="int">
+    <select id="selectQuantityOfCustomerBySatisfaction" resultType="java.lang.Integer" parameterType="int">
         SELECT count(1)
         FROM crm_customer
         WHERE satisfaction = #{satisfaction}
+    </select>
+    <select id="selectByLeval" resultMap="BaseResultMap" parameterType="int">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM crm_customer
+        WHERE grade = #{leval}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         DELETE FROM crm_customer

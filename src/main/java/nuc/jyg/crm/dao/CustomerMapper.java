@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Mapper
 public interface CustomerMapper {
@@ -25,9 +26,13 @@ public interface CustomerMapper {
 
     ArrayList<Customer> selectAllCustomers();
 
+    List<Customer> queryList();
+
     int selectQuantityOfCustomerByGrade(@Param("grade") Integer grade);
 
     int selectQuantityOfCustomerByCredit(@Param("credit") Integer credit);
 
     int selectQuantityOfCustomerBySatisfaction(@Param("satisfaction") Integer satisfaction);
+
+    ArrayList<Customer> selectByLeval(@Param("leval") Integer leval);
 }

@@ -25,54 +25,56 @@
             th:src="@{/DD_belatedPNG_0.0.8a-min.js}"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
-    <title>客户流失分析</title>
+    <title>客户信息管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 统计报表 <span
-        class="c-gray en">&gt;</span>客户流失分析 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
-                                               href="javascript:location.replace(location.href);" title="刷新"><i
-        class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 统计报表<span
+        class="c-gray en">&gt;</span> 客户构成分析<span class="c-gray en">&gt;</span> 客户构成详情 <a
+        class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+        href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
     <div class="text-c">
-        <form class="Huiform" th:method="get" action="/report/loss" target="_self">
-            客户名称：<input type="text" name="customerName" th:value="${customerName}" id="" placeholder=" "
-                        style="width:250px"
-                        class="input-text">
-            &nbsp &nbsp &nbsp &nbsp &nbsp
-            客户经理：<input type="text" name="managerName" th:value="${managerName}" id="" placeholder=" "
-                        style="width:250px"
-                        class="input-text">
-            <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 查询</button>
-            <a name="" id="" class="btn btn-warning" href="/report/page/loss">
-                <i class="Hui-iconfont">&#xe618;</i>报表
-            </a>
-        </form>
+
     </div>
-    <br/>
-<div class="mt-20">
-    <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
-        <thead>
-        <tr class="text-c">
-            <th width="25"><input type="checkbox" name="" value=""></th>
-            <th width="80">编号</th>
-            <th width="80">年份</th>
-            <th width="80">客户</th>
-            <th width="80">客户经理</th>
-            <th width="120">流失原因</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="text-c" th:each=" target: ${result}">
-            <th width="25"><input type="checkbox" name="" value=""></th>
-            <td th:text="${target.getId()}">1</td>
-            <td th:text="${target.getYear()}">2006年</td>
-            <td th:text="${target.getCustomerName()}">大空纶纺</td>
-            <td th:text="${target.getManagerName()}">小满</td>
-            <td th:text="${target.getLossReason()}">客户厂址迁移</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+            <thead>
+            <tr class="text-c">
+                <th width="100">客户编号</th>
+                <th>名称</th>
+                <th width="360">地址</th>
+                <th width="80">客户经理</th>
+                <th width="120">客户等级</th>
+                <th width="120">客户满意度</th>
+                <th width="120">客户信用度</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c" th:each="customer:${customers}">
+                <td th:text="${customer.getId()}">KH071202001</td>
+                <td th:text="${customer.getCustomerName()}"><a href="javascript:;" title="查看客户详情"
+                       onclick="article_edit('','customer_show.html')">北京聪海信息科技有限公司</a></td>
+                <td th:text="${customer.getAddress()}">北京</td>
+                <td th:text="${customer.getManager()}">小明</td>
+                <td th:text="${level}"></td>
+                <div th:switch="${customer.getSatisfaction()}">
+                    <td th:case="1"><i class="Hui-iconfont">&#xe6ff;</i></td>
+                    <td th:case="2"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;</i></td>
+                    <td th:case="3"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+                    <td th:case="4"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+                    <td th:case="5"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+                </div>
+                <div th:switch="${customer.getCredit()}">
+                    <td th:case="1"><i class="Hui-iconfont">&#xe6ff;</i></td>
+                    <td th:case="2"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;</i></td>
+                    <td th:case="3"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+                    <td th:case="4"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+                    <td th:case="5"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+                </div>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="/public/jquery/1.9.1/jquery.min.js"
@@ -97,9 +99,15 @@
         "pading": false,
         "aoColumnDefs": [
             //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            {"orderable": false, "aTargets": [0, 3]}// 不参与排序的列
+            {"orderable": false, "aTargets": []}// 不参与排序的列
         ]
     });
+
+
+    /*客户-查看*/
+    function customer_show(title, url, id, w, h) {
+        layer_show(title, url, w, h);
+    }
 
     /*营销-添加*/
     function article_add(title, url, w, h) {

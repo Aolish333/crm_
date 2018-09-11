@@ -44,14 +44,19 @@
 
             </nav>
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
-                <ul class="cl">
-                    <li>超级管理员（当前用户的访问权限级别）</li>
+                <ul class="cl" th:switch="${session.currentEmployee.getRole()}">
+                    <!--th:if="${session.currentEmployee.getRole() eq 10 || session.currentEmployee.getRole() eq 30}"-->
+                    <li th:case="0">系统管理员</li>
+                    <li th:case="10">销售主管</li>
+                    <li th:case="20">客户经理</li>
+                    <li th:case="30">高管</li>
                     <li class="dropDown dropDown_hover">
-                        <a href="#" class="dropDown_A">admin（当前用户名称） <i class="Hui-iconfont">&#xe6d5;</i></a>
+                        <a href="#" class="dropDown_A" th:text="${session.currentEmployee.getName()}">admin（当前用户名称）
+                            <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
                             <li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
                             <li><a href="#">切换账户</a></li>
-                            <li><a href="#">退出</a></li>
+                            <li><a href="/logout">退出</a></li>
                         </ul>
                     </li>
                     <li id="Hui-msg"><a href="#" title="消息"><span class="badge badge-danger">1</span><i
@@ -125,14 +130,22 @@
             <dt><i class="Hui-iconfont">&#xe61e;</i> 统计报表<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="/report/contribution" data-title="客户贡献分析" href="javascript:void(0)"><i
-                            class="Hui-iconfont">&#xe6cf;</i>客户贡献分析</a></li>
-                    <li><a data-href="/report/constitute" data-title="客户构成分析" href="javascript:void(0)"><i
-                            class="Hui-iconfont">&#xe635;</i>客户构成分析</a></li>
-                    <li><a data-href="/report/service" data-title="客户服务分析" href="javascript:void(0)"><i
-                            class="Hui-iconfont">&#xe672;</i>客户服务分析</a></li>
-                    <li><a data-href="/report/loss" data-title="客户流失分析" href="javascript:void(0)"><i
-                            class="Hui-iconfont">&#xe6ba;</i>客户流失分析</a></li>
+                    <li th:if="${session.currentEmployee.getRole() eq 10 || session.currentEmployee.getRole() eq 30}">
+                        <a data-href="/report/contribution" data-title="客户贡献分析" href="javascript:void(0)"><i
+                                class="Hui-iconfont">&#xe6cf;</i>客户贡献分析</a>
+                    </li>
+                    <li th:if="${session.currentEmployee.getRole() eq 10 || session.currentEmployee.getRole() eq 30}">
+                        <a data-href="/report/constitute" data-title="客户构成分析" href="javascript:void(0)"><i
+                                class="Hui-iconfont">&#xe635;</i>客户构成分析</a>
+                    </li>
+                    <li th:if="${session.currentEmployee.getRole() eq 10 || session.currentEmployee.getRole() eq 30}">
+                        <a data-href="/report/service" data-title="客户服务分析" href="javascript:void(0)"><i
+                                class="Hui-iconfont">&#xe672;</i>客户服务分析</a>
+                    </li>
+                    <li th:if="${session.currentEmployee.getRole() eq 10 || session.currentEmployee.getRole() eq 30}">
+                        <a data-href="/report/loss" data-title="客户流失分析" href="javascript:void(0)"><i
+                                class="Hui-iconfont">&#xe6ba;</i>客户流失分析</a>
+                    </li>
 
                 </ul>
             </dd>
@@ -207,7 +220,7 @@
     <div id="iframe_box" class="Hui-article">
         <div class="show_iframe">
             <div style="display:none" class="loading"></div>
-            <iframe scrolling="yes" frameborder="0" src="welcome.html" th:replace="@{welcome.html}"></iframe>
+            <iframe scrolling="yes" frameborder="0" src="welcome.html" th:replace="welcome"></iframe>
         </div>
     </div>
 </section>
@@ -264,8 +277,6 @@
             shade: 0.4,
             title: '查看信息',
             content: '<div><table class="table table-border table-bordered table-bg table-hover  table-responsive"><form class="Huiform" method="post" action="" target="_self"><div><tr><span style="float:left;"><h4>&nbsp;&nbsp;&nbsp;当前用户信息</h4></span></tr><tr><td width="100"><span class="l"  ><label >用户名称：</label> </span> </td><td><span style="float:left;">admin</span></td></tr><tr> <td width="100"><span class="l" > <label>用户权限级别：</label></span> </td><td><span style="float:left;">超级管理员</span></td> </tr> </table></div>'
-
-
         });
     }
 

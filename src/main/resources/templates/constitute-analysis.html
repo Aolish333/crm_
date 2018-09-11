@@ -45,26 +45,44 @@
 			</span>
             <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 查询</button>
             <a name="" id="" class="btn btn-warning" href="/report/page/constitute">
-                <i class="Hui-iconfont">&#xe61a;</i>报表
+                <i class="Hui-iconfont">&#xe621;</i>报表
             </a>
         </form>
     </div>
-    共有数据：<strong>54</strong> 条</span> </div>
+    <br/>
 <div class="mt-20">
     <table class="table table-border table-bordered table-bg table-sort">
         <thead>
         <tr class="text-c">
             <th width="25"><input type="checkbox" name="" value=""></th>
             <th width="70">编号</th>
-            <th width="80" th:text="${manner}" >等级</th>
+            <th width="80" th:text="${manner}">等级</th>
             <th width="200">客户数量</th>
         </tr>
         </thead>
+        <!--target.getValue().getKey()-->
         <tbody>
         <tr class="text-c" th:each="target:${result}">
             <td><input name="" type="checkbox" value=""></td>
             <td th:text="${target.getKey()}"></td>
-            <td th:text="${target.getValue().getKey()}"></td>
+            <div th:if="${manner eq '按等级'}">
+                <td><a th:text="${target.getValue().getKey()}"
+                       th:href="@{/report/page/detail(level=${target.getValue().getKey()})}"></a></td>
+            </div>
+            <div th:if="${manner eq '按信用度'}" th:switch="${target.getValue().getKey()}">
+                <td th:case="一颗星"><i class="Hui-iconfont">&#xe6ff;</i></td>
+                <td th:case="二颗星"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;</i></td>
+                <td th:case="三颗星"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+                <td th:case="四颗星"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+                <td th:case="五颗星"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+            </div>
+            <div th:if="${manner eq '按满意度'}" th:switch="${target.getValue().getKey()}">
+                <td th:case="一颗星"><i class="Hui-iconfont">&#xe6ff;</i></td>
+                <td th:case="二颗星"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;</i></td>
+                <td th:case="三颗星"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+                <td th:case="四颗星"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+                <td th:case="五颗星"><i class="Hui-iconfont">&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;&#xe6ff;</i></td>
+            </div>
             <td th:text="${target.getValue().getValue()}"></td>
         </tr>
         </tbody>
@@ -82,7 +100,8 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="public/My97DatePicker/4.8/WdatePicker.js"
         th:src="@{/My97DatePicker/4.8/WdatePicker.js}"></script>
-<script type="text/javascript" src="public/datatables/1.10.0/jquery.dataTables.min.js" th:src="@{/datatables/1.10.0/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" src="public/datatables/1.10.0/jquery.dataTables.min.js"
+        th:src="@{/datatables/1.10.0/jquery.dataTables.min.js}"></script>
 <script type="text/javascript" src="public/laypage/1.2/laypage.js" th:src="@{/laypage/1.2/laypage.js}"></script>
 <script type="text/javascript">
     $('.table-sort').dataTable({

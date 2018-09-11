@@ -42,11 +42,8 @@
             &nbsp &nbsp &nbsp
             年份：<span class="select-box" style="width:150px">
 			<select class="select" name="year" size="1">
-				<option value="全部" selected>全部</option>
-				<option value="2018">2018</option>
-				<option value="2017">2017</option>
-				<option value="2016">2016</option>
-				<option value="2015">2015</option>
+				<option th:selected="${year eq target}" th:each="target:${years}" th:value="${target}"
+                        th:text="${target}">全部</option>
 			</select>
 			</span>
             <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 查询</button>
@@ -55,28 +52,28 @@
             </a>
         </form>
     </div>
-    共有数据：<strong>54</strong> 条</span> </div>
-<div class="mt-20">
-    <table class="table table-border table-bordered table-bg table-sort">
-        <thead>
-        <tr class="text-c">
-            <th width="25"><input type="checkbox" name="" value=""></th>
-            <th width="70">编号</th>
-            <th width="80">客户名称</th>
-            <th width="200">订单金额（元）</th>
+    <br/>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="70">编号</th>
+                <th width="80">客户名称</th>
+                <th width="200">订单金额（元）</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="text-c" th:each="customerVO:${customerVOS}">
-            <td><input name="" type="checkbox" value=""></td>
-            <td th:text="${customerVO.id}"></td>
-            <td th:text="${customerVO.usernmae}"></td>
-            <td th:text="${customerVO.orderAmount}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c" th:each="customerVO:${customerVOS}">
+                <td><input name="" type="checkbox" value=""></td>
+                <td th:text="${customerVO.id}"></td>
+                <td th:text="${customerVO.usernmae}"></td>
+                <td th:text="${customerVO.orderAmount}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="/public/jquery/1.9.1/jquery.min.js"
