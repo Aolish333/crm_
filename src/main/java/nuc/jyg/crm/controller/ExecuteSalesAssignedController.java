@@ -31,6 +31,9 @@ public class ExecuteSalesAssignedController {
     @Autowired
     SaleOpportunityMapper saleOpportunityMapper;
 
+    /** 执行页面*/
+    public static final String CUSTOMER_DEVELOP_EXECUTEPLAN = "customer-develop-executeplan";
+
     /**
      * 客户开发主页面
      */
@@ -48,6 +51,17 @@ public class ExecuteSalesAssignedController {
     public String executePlan(Model model, SaleOpportunity saleOpportunity) {
 
         return CUSTOMER_DEVELOP;
+    }
+
+
+    /** 根据计划ID添加执行效果 */
+    @PostMapping(value = "/updataPlanResult" )
+    public String updataPlanResult(Model model,Plan plan){
+        planMapper.updateByPrimaryKeySelective(plan);
+        SaleOpportunity saleOpportunity = saleOpportunityMapper.selectByNumber(plan.getSaleId());
+        model.addAttribute("allPlans",returnList(plan.getSaleId()));
+        model.addAttribute("allSale", saleOpportunity);
+        return CUSTOMER_DEVELOP_EXECUTEPLAN;
     }
 
     /** 根据销售ID新建计划 */

@@ -22,6 +22,8 @@ public interface SaleOpportunityMapper {
 
     List <SaleOpportunity> selectByStatus(Byte status);
 
+    List <SaleOpportunity> selectByStatusF(Byte status);
+
     SaleOpportunity selectByNumber(Integer id);
 
 }

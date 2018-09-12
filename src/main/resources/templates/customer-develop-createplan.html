@@ -96,7 +96,7 @@
 				<td th:text="${allSale.founder}"><span style="float:left;"> </span></td>
 
 				<td width="100"><span class="l" > <label>创建时间：</label></span></td>
-				<td th:text="${allSale.createTime}"><span style="float:left;"></span></td>
+				<td th:text="${#dates.format(allSale.createTime, 'yyyy-MM-dd HH:mm:ss')}"><span style="float:left;"></span></td>
 
 			</tr>
 			<tr>
@@ -104,7 +104,7 @@
 				<td th:text="${allSale.owner}"><span style="float:left;"> </span></td>
 
 				<td><span class="l" > <label>指派时间：</label></span></td>
-				<td th:text="${allSale.assignTime}"><span style="float:left;"></span></td>
+				<td th:text="${#dates.format(allSale.assignTime, 'yyyy-MM-dd HH:mm:ss')}"><span style="float:left;"></span></td>
 
 			</tr>
 
@@ -170,7 +170,7 @@
 					<td><input type="checkbox" value="" name=""></td>
 							<input  type="hidden" th:value="${allPlan.id}"  name="id" id="id">
 							<input  type="hidden" th:value="${allPlan.saleId}"  name="saleId" id="saleId">
-					<td th:text="${allPlan.createTime}"  name="createTime" type="text"></td>
+					<td th:text="${#dates.format(allPlan.createTime, 'yyyy-MM-dd HH:mm:ss')}"  name="createTime" type="text"></td>
 					<td class="f-14 td-manage">
 						<div class="formControls col-xs-8 col-sm-9">
 							<input th:value="${allPlan.planContent}" type="text" class="input-text" value="" placeholder="" id="plan" name="planContent">
@@ -191,7 +191,7 @@
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 			<span style="text-align: right;display:block;">
 			
-				<a style="text-decoration:none" class="btn btn-primary radius"  href="customer-develop-executeplan.html" ><i class="Hui-iconfont">&#xe726;</i>执行计划</a>
+				<a style="text-decoration:none" class="btn btn-primary radius" th:href="@{/toExecutePlan/{number}(number=${allSale.number})}" ><i class="Hui-iconfont">&#xe726;</i>执行计划</a>
 				<a class="btn btn-default radius" th:href="@{/developingCustomer}" type="button" href="javascript:window.location.href ='customer-develop.html'">返回客户开发界面</a>
 			</div>
 

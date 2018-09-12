@@ -27,7 +27,7 @@ import java.util.List;
 public class EnactSalesAssignedController {
 
     @Autowired
-    SaleOpportunityMapper saleOpportunityMaper;
+    SaleOpportunityMapper saleOpportunityMapper;
 
     @Autowired
     PlanMapper planMapper;
@@ -44,7 +44,7 @@ public class EnactSalesAssignedController {
     /** 跳到—》开发计划*/
     @GetMapping(value = "/toAppointPlan/{number}")
     public String toAppointPlan(Model model,@PathVariable String number) {
-        SaleOpportunity saleOpportunity = saleOpportunityMaper.selectByNumber(Integer.valueOf(number));
+        SaleOpportunity saleOpportunity = saleOpportunityMapper.selectByNumber(Integer.valueOf(number));
         model.addAttribute("allPlans",returnList(Integer.parseInt(number)));
         model.addAttribute("allSale", saleOpportunity);
         return CUSTOMER_DEVELOP_CREATEPLAN;
@@ -53,7 +53,7 @@ public class EnactSalesAssignedController {
     /** 跳到—》执行计划页面*/
         @GetMapping(value = "/toExecutePlan/{number}" )
     public String toExecutePlan(Model model ,@PathVariable String number) {
-            SaleOpportunity saleOpportunity = saleOpportunityMaper.selectByNumber(Integer.valueOf(number));
+            SaleOpportunity saleOpportunity = saleOpportunityMapper.selectByNumber(Integer.valueOf(number));
             model.addAttribute("allPlans",returnList(Integer.parseInt(number)));
             model.addAttribute("allSale", saleOpportunity);
         return CUSTOMER_DEVELOP_EXECUTEPLAN;

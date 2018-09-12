@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 /**
  * 开发计划（成功/失败）
  */
@@ -33,6 +35,7 @@ public class DevelopeSalesAssignedController {
     @Autowired
     SaleOpportunityMapper saleOpportunityMapper;
 
+
     /**
      * 客户开发主页面
      */
@@ -44,15 +47,6 @@ public class DevelopeSalesAssignedController {
 //        错误
         return CUSTOMER_DEVELOP;
     }
-    /** 根据计划ID添加执行效果 */
-    @GetMapping(value = "/updataPlanResult/{id}/{planResult}" )
-    public String updataPlanResult(Model model,@PathVariable Integer id,
-                                   @PathVariable String planResult){
-        Plan plan = new Plan();
-        plan.setPlanContent(planResult);
-        plan.setSaleId(id);
-        return CUSTOMER_DEVELOP_EXECUTEPLAN;
-    }
 
     /** -》开发成功 */
     @GetMapping(value = "/toDevelopSuccess/{id}" )
@@ -61,6 +55,9 @@ public class DevelopeSalesAssignedController {
         saleOpportunity.setId(id);
         saleOpportunity.setStatus((byte) Const.SaleOpportunityStatusEnum.DEVELOPMENT_SUCCESSFUL.getCode());
         saleOpportunityMapper.updateByPrimaryKeySelective(saleOpportunity);
+        SaleOpportunity saleOpportunityOK = saleOpportunityMapper.selectByPrimaryKey(id);
+        model.addAttribute("allPlans", returnList(saleOpportunityOK.getNumber()));
+        model.addAttribute("allSale", saleOpportunityOK);
         return CUSTOMER_DEVELOP_EXECUTEPLAN;
     }
 
@@ -71,7 +68,16 @@ public class DevelopeSalesAssignedController {
         saleOpportunity.setId(id);
         saleOpportunity.setStatus((byte) Const.SaleOpportunityStatusEnum.DEVELOPMENT_FAILURE.getCode());
         saleOpportunityMapper.updateByPrimaryKeySelective(saleOpportunity);
+        SaleOpportunity saleOpportunityOK = saleOpportunityMapper.selectByPrimaryKey(id);
+        model.addAttribute("allPlans", returnList(saleOpportunityOK.getNumber()));
+        model.addAttribute("allSale", saleOpportunityOK);
         return CUSTOMER_DEVELOP_EXECUTEPLAN;
+    }
+
+    /** 添加sid的计划*/
+    public List<Plan> returnList(int sid){
+        List <Plan> plans = planMapper.selectBySid(sid);
+        return plans;
     }
 
 }

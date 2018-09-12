@@ -39,6 +39,20 @@
     where status = #{status,jdbcType=INTEGER}
   </select>
 
+  <select  id="selectByStatusF" resultMap="BaseResultMap" parameterType="java.lang.Byte" >
+    select
+    <include refid="Base_Column_List" />
+    from crm_sale_opportunity
+    where status != #{status,jdbcType=INTEGER}
+  </select>
+
+  <!--<select  id="selectByTime" resultMap="BaseResultMap" >-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from crm_sale_opportunity-->
+    <!--where customer_name = #{customerName,jdbcType=INTEGER} AND create_time >=  #{createTime,jdbcType=INTEGER}-->
+  <!--</select>-->
+
 
 
   <select  id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

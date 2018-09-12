@@ -2,6 +2,7 @@ package nuc.jyg.crm.controller;
 
 import nuc.jyg.crm.common.Const;
 import nuc.jyg.crm.dao.CustomerMapper;
+import nuc.jyg.crm.dao.SaleOpportunityMapper;
 import nuc.jyg.crm.model.SaleOpportunity;
 import nuc.jyg.crm.service.lxj.SalesAssignedService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class HomeController {
     @Autowired
     SalesAssignedService salesAssignedService;
 
+    @Autowired
+    SaleOpportunityMapper saleOpportunityMapper;
+
     @GetMapping(value = {"", "/"})
     public String welcome() {
         return "index";
@@ -46,7 +50,7 @@ public class HomeController {
      */
     @GetMapping(value = "/developingCustomer")
     public String developingCustomer(Model model) {
-        List<SaleOpportunity> opportunityList =  salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.ALLOCATED.getCode()));
+        List<SaleOpportunity> opportunityList = saleOpportunityMapper.selectByStatusF(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode()));
         model.addAttribute("allSales", opportunityList);
         return CUSTOMER_DEVELOP;
     }

@@ -28,11 +28,13 @@
 <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
+<!--id="form-article-add"-->
 <article class="page-container">
-	<form th:action="@{/sale/opportunity/edit}" method="post" class="form form-horizontal" id="form-article-add">
+	<form th:action="@{/sale/opportunity/edit}" method="post" class="form form-horizontal" >
 	
 	<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">编号：</label>
+		<input  type="hidden" th:value="${allSale.id}"  name="id" id="id">
+		<label class="form-label col-xs-4 col-sm-2">编号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input th:value="${allSale.number}" type="text" class="input-text" value="" placeholder="" id="sid" name="number">
 			</div>
@@ -84,7 +86,8 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>机会描述：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<textarea th:value="${allSale.opportunityDescription}" name="opportunityDescription" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,10)"></textarea>
+				<!--<input th:value="${allSale.opportunityDescription}">-->
+				<textarea th:text="${allSale.opportunityDescription}" name="opportunityDescription" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,10)"></textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
 			</div>
 		</div>
@@ -98,20 +101,22 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>创建时间：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input th:value="${allSale.createTime}" type="text" onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'createtime\')||\'%y-%M-%d\'}' })" id="createtime" name="createTime" class="input-text Wdate">
+				<!--<input  th:value="${allSale.createTime}" type="text"  name="createTime" class="input-text Wdate">-->
+				<!--<input th:value="${allSale.createTime}" type="text"  onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss' })" id="createtime" name="createTime" class="input-text Wdate">		-->
+				<input th:value="${#dates.format(allSale.createTime, 'yyyy-MM-dd HH:mm:ss')}" type="text"  onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss' })" id="createtime" name="createTime" class="input-text Wdate">
 			</div>
 		</div>
 
 		<div class="row cl">
 			<label  class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>指派给：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input th:value="${allSale.owner}" type="text" class="input-text" value=""  placeholder="" id="dispatcher" name="dispatcher">
+				<input th:value="${allSale.owner}" type="text" class="input-text" value=""  placeholder="" id="dispatcher" name="owner">
 			</div>
 		</div>
 		<div class="row cl">
 			<label  class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>指派时间：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input th:value="${allSale.assignTime}" type="text"  onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'dispatchtime\')||\'%y-%M-%d\'}' })" id="dispatchtime" name="dispatchtime" class="input-text Wdate">
+				<input th:value="${#dates.format(allSale.assignTime, 'yyyy-MM-dd HH:mm:ss')}" type="text"  onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss' })" id="dispatchtime" name="assignTime" class="input-text Wdate">
 			</div>
 		</div>
 		<div class="row cl">

@@ -2,6 +2,7 @@ package nuc.jyg.crm.controller;
 
 import nuc.jyg.crm.common.Const;
 import nuc.jyg.crm.model.SaleOpportunity;
+import nuc.jyg.crm.model.SaleOpportunityTime;
 import nuc.jyg.crm.service.lxj.SalesAssignedService;
 import nuc.jyg.crm.util.DateTimeUtil;
 import nuc.jyg.crm.util.NumberGenerationUtil;
@@ -34,22 +35,25 @@ public class SalesAssignedController {
     }
 
     @PostMapping(value = "/create")
-    public String create(SaleOpportunity saleOpportunityPara,Model model){
+    public String create(SaleOpportunityTime saleOpportunityTime,Model model){
 
         /**  必填的信息*/
         SaleOpportunity saleOpportunity = new SaleOpportunity();
-        saleOpportunity.setFounder(saleOpportunityPara.getFounder());
-        saleOpportunity.setCustomerName(saleOpportunityPara.getCustomerName());
-        saleOpportunity.setSummary(saleOpportunityPara.getSummary());
-        saleOpportunity.setOpportunityDescription(saleOpportunityPara.getOpportunityDescription());
-        saleOpportunity.setChance(Byte.valueOf(saleOpportunityPara.getChance()));
+        saleOpportunity.setFounder(saleOpportunityTime.getFounder());
+        saleOpportunity.setCustomerName(saleOpportunityTime.getCustomerName());
+        saleOpportunity.setSummary(saleOpportunityTime.getSummary());
+        saleOpportunity.setOpportunityDescription(saleOpportunityTime.getOpportunityDescription());
+        saleOpportunity.setChance(Byte.valueOf(saleOpportunityTime.getChance()));
 
         /**  选填信息*/
 
+        saleOpportunity.setSource(saleOpportunityTime.getSource());
+        saleOpportunity.setFounder(saleOpportunityTime.getFounder());
+
         saleOpportunity.setNumber(Integer.valueOf(NumberGenerationUtil.number(9)));
         saleOpportunity.setStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode()));
-        saleOpportunity.setContactPhone(saleOpportunityPara.getContactPhone());
-        saleOpportunity.setContact(saleOpportunityPara.getContact());
+        saleOpportunity.setContactPhone(saleOpportunityTime.getContactPhone());
+        saleOpportunity.setContact(saleOpportunityTime.getContact());
 
         salesAssignedService.createSaleOpportunity(saleOpportunity);
 
@@ -68,15 +72,12 @@ public class SalesAssignedController {
      * @param assign_time
      * @return
      */
-    @PostMapping(value = "/dispatch/{id}/{owner}/{assign_time}")
-    public String dispatch(@PathVariable (value = "id") Integer id ,
-                                     @PathVariable(value = "owner") String owner,
-                                     @PathVariable (value = "assign_time") String assign_time,
-                           Model model ) {
+    @PostMapping(value = "/dispatch")
+    public String dispatch(SaleOpportunityTime saleOpportunityTime, Model model ) {
         SaleOpportunity saleOpportunity = new SaleOpportunity();
-        saleOpportunity.setOwner(owner);
-        saleOpportunity.setId(id);
-        saleOpportunity.setAssignTime(DateTimeUtil.strToDates(assign_time));
+        saleOpportunity.setOwner(saleOpportunityTime.getOwner());
+        saleOpportunity.setId(saleOpportunityTime.getId());
+        saleOpportunity.setAssignTime(DateTimeUtil.strToDate(saleOpportunityTime.getAssignTime()));
 
         saleOpportunity.setStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.ALLOCATED.getCode()));
 
@@ -91,22 +92,24 @@ public class SalesAssignedController {
     }
 
     @PostMapping(value = "/edit")
-    public String edit(SaleOpportunity saleOpportunityPara ,Model model) {
+    public String edit(SaleOpportunityTime saleOpportunityTime , Model model) {
         SaleOpportunity saleOpportunity = new SaleOpportunity();
+        saleOpportunity.setId(saleOpportunityTime.getId());
+        saleOpportunity.setFounder(saleOpportunityTime.getFounder());
+        saleOpportunity.setCustomerName(saleOpportunityTime.getCustomerName());
+        saleOpportunity.setSummary(saleOpportunityTime.getSummary());
+        saleOpportunity.setOpportunityDescription(saleOpportunityTime.getOpportunityDescription());
+        saleOpportunity.setChance(Byte.valueOf(saleOpportunityTime.getChance()));
 
-        saleOpportunity.setFounder(saleOpportunityPara.getFounder());
-        saleOpportunity.setCustomerName(saleOpportunityPara.getCustomerName());
-        saleOpportunity.setSummary(saleOpportunityPara.getSummary());
-        saleOpportunity.setOpportunityDescription(saleOpportunityPara.getOpportunityDescription());
-        saleOpportunity.setChance(Byte.valueOf(saleOpportunityPara.getChance()));
+        saleOpportunity.setCreateTime(DateTimeUtil.strToDate(saleOpportunityTime.getCreateTime()));
+        saleOpportunity.setAssignTime(DateTimeUtil.strToDate(saleOpportunityTime.getAssignTime()));
+        saleOpportunity.setOwner(saleOpportunityTime.getOwner());
 
+        saleOpportunity.setNumber(saleOpportunityTime.getNumber());
+        saleOpportunity.setContactPhone(saleOpportunityTime.getContactPhone());
+        saleOpportunity.setContact(saleOpportunityTime.getContact());
 
-        saleOpportunity.setContact(saleOpportunityPara.getContact());
-        saleOpportunity.setContactPhone(saleOpportunity.getContactPhone());
-        saleOpportunity.setSource(saleOpportunityPara.getSource());
-
-        saleOpportunity.setId(saleOpportunityPara.getId());
-
+        saleOpportunity.setStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.ALLOCATED.getCode()));
         salesAssignedService.alterSalesAssigned(saleOpportunity);
 
         /** 返回销售机会管理*/

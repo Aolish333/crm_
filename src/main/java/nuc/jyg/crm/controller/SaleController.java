@@ -5,12 +5,14 @@ import nuc.jyg.crm.dao.EmployeeMapper;
 import nuc.jyg.crm.dao.SaleOpportunityMapper;
 import nuc.jyg.crm.model.Employee;
 import nuc.jyg.crm.model.SaleOpportunity;
+import nuc.jyg.crm.model.TimeQueryL;
 import nuc.jyg.crm.service.lxj.SalesAssignedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,9 @@ import java.util.List;
  */
 @Controller
 public class SaleController {
+    public static final String SALES_OPPORTUNITY_EDIT = "sales-opportunity-edit";
+    public static final String SALES_OPPORTUNITY = "sales-opportunity";
+    public static final String SALES_OPPORTUNITY_DISPATCH = "sales-opportunity-dispatch";
     @Autowired
     SaleOpportunityMapper saleOpportunityMaper;
 
@@ -54,14 +59,14 @@ public class SaleController {
         }
         model.addAttribute("allEmployee", strings);
 
-        return "sales-opportunity-dispatch";
+        return SALES_OPPORTUNITY_DISPATCH;
     }
 
     @GetMapping(value = "/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         SaleOpportunity saleOpportunity = saleOpportunityMaper.selectByPrimaryKey(id);
         model.addAttribute("allSale", saleOpportunity);
-        return "sales-opportunity-edit";
+        return SALES_OPPORTUNITY_EDIT;
     }
 
     @GetMapping(value = "/delete/{id}")
@@ -72,7 +77,14 @@ public class SaleController {
         salesAssignedService.dropSalesAssigned(saleOpportunity);
         List <SaleOpportunity> opportunityList = salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode()));
         model.addAttribute("allSales", opportunityList);
-        return "sales-opportunity";
+        return SALES_OPPORTUNITY;
+    }
+
+    /** 根据日期进行查询*/
+    @PostMapping(value = "querySaleByTime")
+    public String query(TimeQueryL timeQueryL,Model model){
+
+        return SALES_OPPORTUNITY;
     }
 
 }
