@@ -46,43 +46,38 @@
         href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
 <article class="page-container">
-
-
-    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+    <form action="/data/update" method="get" class="form form-horizontal" id="form-member-add">
+        <input type="hidden" name="id" value="value" th:value="${dataDictionarie.getId()}">
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">编号：</label>
-            <div class="formControls col-xs-8 col-sm-9">
+            <div class="formControls col-xs-8 col-sm-9" th:value="${dataDictionarie.getDataNumber()}">
                 9
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>类别：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class=" auto-inp" id="input" name="category">
+                <input type="text" class="input-text" id="kind" name="kind" th:value="${dataDictionarie.getKind()}"
+                       style="width: 150px">
                 <div class="auto hidden" id="auto">
                     <div class="auto_out">1</div>
                     <div class="auto_out">2</div>
                 </div>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>条目：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="entry" name="entry">
+                <input type="text" class="input-text" value="" placeholder="" id="entry" name="entry"
+                       th:value="${dataDictionarie.getEntry()}">
             </div>
         </div>
 
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>值：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="value" name="value">
+                <input type="text" class="input-text" value="" placeholder="" id="value" name="value"
+                       th:value="${dataDictionarie.getValue()}">
             </div>
         </div>
 
@@ -90,7 +85,7 @@
             <label class="form-label col-xs-4 col-sm-2">是否可编辑：</label>
             <div class="formControls col-xs-8 col-sm-9 skin-minimal">
                 <div class="check-box">
-                    <input type="checkbox" id="checkbox-1">
+                    <input type="checkbox" id="checkbox-1" th:checked="${dataDictionarie.getEditable()}">
                     <label for="checkbox-1">&nbsp;</label>
                 </div>
             </div>
@@ -100,8 +95,7 @@
         <div class="row cl">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                 <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;保存&nbsp;&nbsp;">
-                <a class="btn btn-default radius" type="button"
-                   href="javascript:window.location.href ='system-dictionary.html'">返回数据字典界面</a>
+                <a class="btn btn-default radius" th:href="@{/data/dictionarys}" th:text="返回数据字典界面"/></a>
             </div>
         </div>
     </form>
