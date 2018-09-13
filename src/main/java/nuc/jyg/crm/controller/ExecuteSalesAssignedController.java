@@ -81,7 +81,6 @@ public class ExecuteSalesAssignedController {
     /** 根据计划ID修改计划项 */
     @PostMapping(value = "/updataPlan")
     public String updataPlan(Model model,@ModelAttribute Plan plan){
-
         planMapper.updateByPrimaryKeySelective(plan);
         System.out.println("__________"+plan.toString());
         SaleOpportunity saleOpportunity = saleOpportunityMapper.selectByNumber(plan.getSaleId());
@@ -93,8 +92,7 @@ public class ExecuteSalesAssignedController {
 
     /** 根据计划ID删除计划项 */
     @GetMapping(value = "/deletePlan/{id}")
-    public String deletePlan(Model model,
-                             @PathVariable Integer id){
+    public String deletePlan(Model model,@PathVariable Integer id){
         Plan plan = planMapper.selectByPrimaryKey(id);
         SaleOpportunity saleOpportunity = saleOpportunityMapper.selectByNumber(plan.getSaleId());
         planMapper.deleteByPrimaryKey(id);

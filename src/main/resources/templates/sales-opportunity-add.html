@@ -93,15 +93,10 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>创建人：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text"  readonly="true" class="input-text" value="" placeholder="" id="author" name="founder">
+				<input th:value="${session.currentEmployee.getName()}" type="text"  readonly="true" class="input-text" placeholder="" id="author" name="founder">
 			</div>
 		</div>
-		
-	
-	
-	
-			
-				
+
 				
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>创建时间：</label>

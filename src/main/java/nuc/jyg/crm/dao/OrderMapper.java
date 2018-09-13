@@ -21,11 +21,9 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
-    ArrayList<Order> selectByCustomerIdAndStatus(@Param("id") Integer id, @Param("status") Integer status);
+    ArrayList <Order> selectByCustomerIdAndStatus(@Param("id") Integer id, @Param("status") Integer status);
 
-    ArrayList<Order> selectOrdersByUserIdAndStatusAndYears(@Param("id") Integer id, @Param("status") Integer status,
-                                                           @Param("yearsStart") String yearsStart, @Param("yearsEnd")
-                                                                   String yearsEnd);
+    ArrayList <Order> selectOrdersByUserIdAndStatusAndYears(@Param("id") Integer id, @Param("status") Integer status, @Param("yearsStart") String yearsStart, @Param("yearsEnd") String yearsEnd);
 
     Order selectLastOrdersByCustomerId(@Param("customerId") Integer customerId);
 }

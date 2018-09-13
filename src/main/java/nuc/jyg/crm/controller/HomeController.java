@@ -1,9 +1,12 @@
 package nuc.jyg.crm.controller;
 
+import lombok.extern.log4j.Log4j2;
 import nuc.jyg.crm.common.Const;
 import nuc.jyg.crm.dao.CustomerMapper;
 import nuc.jyg.crm.dao.SaleOpportunityMapper;
+import nuc.jyg.crm.model.Employee;
 import nuc.jyg.crm.model.SaleOpportunity;
+import nuc.jyg.crm.service.hikari.IEmployeeService;
 import nuc.jyg.crm.service.lxj.SalesAssignedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
-
 import java.util.List;
 
 /**
@@ -63,6 +65,7 @@ public class HomeController {
     @GetMapping(value = {"/welcome"})
     public String welcomes() {
         return "welcome";
+    }
     @GetMapping(value = "/sales")
     public String sale(Model model) {
         List<SaleOpportunity> opportunityList =  salesAssignedService.querySaleOpportunityByStatus(Byte.valueOf((byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode()));

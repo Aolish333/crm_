@@ -29,7 +29,7 @@
       plan_result, create_time, update_time
       )
     values (#{id,jdbcType=INTEGER}, #{saleId,jdbcType=INTEGER}, #{planContent,jdbcType=VARCHAR}, 
-      #{planResult,jdbcType=VARCHAR}, now(), now()
+      #{planResult,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, now()
       )
   </insert>
   <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Plan" >
@@ -105,4 +105,10 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectBySid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from crm_plan
+    where sale_id = #{saleId,jdbcType=INTEGER}
+  </select>
 </mapper>
