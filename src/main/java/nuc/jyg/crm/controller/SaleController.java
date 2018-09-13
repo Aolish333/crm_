@@ -33,6 +33,7 @@ public class SaleController {
     public static final String SALES_OPPORTUNITY_EDIT = "sales-opportunity-edit";
     public static final String SALES_OPPORTUNITY = "sales-opportunity";
     public static final String SALES_OPPORTUNITY_DISPATCH = "sales-opportunity-dispatch";
+    public static final String STRING = " 23:59:59";
     @Autowired
     SaleOpportunityMapper saleOpportunityMaper;
 
@@ -97,16 +98,23 @@ public class SaleController {
         Date para1 = null;
         Date para2 = null;
         String name = null;
+        List <SaleOpportunity> opportunityList = null;
+
         if (timeQueryL.getTimePara1()!=null && !timeQueryL.getTimePara1().isEmpty()) {
-            para1 = DateTimeUtil.strToDates(timeQueryL.getTimePara1());
+            para1 = DateTimeUtil.strToDate(timeQueryL.getTimePara1()+ STRING);
         }
         if (timeQueryL.getTimePara2()!=null && !timeQueryL.getTimePara2().isEmpty()) {
-            para2 = DateTimeUtil.strToDates(timeQueryL.getTimePara2());
+            para2 = DateTimeUtil.strToDate(timeQueryL.getTimePara2()+STRING);
         }
         if(timeQueryL.getCustomer()!=null && !timeQueryL.getCustomer().isEmpty()){
             name = timeQueryL.getCustomer();
         }
-        List <SaleOpportunity> opportunityList =  saleOpportunityMaper.selectByTime(name,para1,para2, (byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode(),null);
+        System.out.println(name.toString()+"ooooooooooo");
+        if (timeQueryL.getStatus().equals("0")){
+            opportunityList =  saleOpportunityMaper.selectByTime(name,para1,para2, (byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode(),null);
+        }else {
+            opportunityList =  saleOpportunityMaper.selectByTime(name,para1,para2,null, (byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode());
+        }
         model.addAttribute("allSales", opportunityList);
         return SALES_OPPORTUNITY;
     }

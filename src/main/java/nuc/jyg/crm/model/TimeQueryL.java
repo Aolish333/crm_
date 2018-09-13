@@ -18,4 +18,5 @@ public class TimeQueryL {
     String timePara1;
     String timePara2;
     String customer;
+    String status;
 }

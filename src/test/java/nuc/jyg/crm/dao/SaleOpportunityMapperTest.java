@@ -23,7 +23,8 @@ public class SaleOpportunityMapperTest {
 
     @Test
     public void selectByTime() throws Exception {
-     List<SaleOpportunity> saleOpportunities =  saleOpportunityMapper.selectByTime(null,DateTimeUtil.strToDate("2017-3-4 09:25:13"),DateTimeUtil.strToDate("2018-9-12 09:25:13"), (byte) 1,null);
+//     List<SaleOpportunity> saleOpportunities =  saleOpportunityMapper.selectByTime("李晓津",DateTimeUtil.strToDate("2017-3-4 09:25:13"),DateTimeUtil.strToDate("2018-9-12 09:25:13") ,(byte) 1,null);
+     List<SaleOpportunity> saleOpportunities =  saleOpportunityMapper.selectByTime("李晓津",DateTimeUtil.strToDate("2013-3-4 09:25:13"),DateTimeUtil.strToDate("2018-9-15 09:25:13") ,null,(byte) 1);
 //     List<SaleOpportunity> saleOpportunities =  saleOpportunityMapper.selectByTime(null,"2017-3-4","2018-9-12", (byte) 1,null);
         System.out.println("000000000"+saleOpportunities.toString());
     }

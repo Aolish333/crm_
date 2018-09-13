@@ -52,16 +52,16 @@
     from crm_sale_opportunity
     where
     <if test="customerName != null">
-         customer_name LIKE #{customerName}
+      customer_name LIKE #{customerName}
+    </if>
+    <if test=" status1 != null ">
+      AND status =  #{status1}
     </if>
     <if test="startTime != null and endTime != null ">
        AND create_time BETWEEN  #{startTime} AND  #{endTime}
     </if>
-    <if test=" status1 != null ">
-      AND  status =  #{status1}
-    </if>
     <if test=" status2 != null ">
-      AND  status !=  #{status2}
+      AND status != #{status2,jdbcType=INTEGER}
     </if>
   </select>
 

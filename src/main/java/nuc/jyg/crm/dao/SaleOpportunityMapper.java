@@ -26,8 +26,6 @@ public interface SaleOpportunityMapper {
 
     List <SaleOpportunity> selectByStatusF(Byte status);
 
-
-//    List <SaleOpportunity> selectByTime(@Param("customerName")String customerName, @Param("startTime")Date startTime, @Param("endTime") Date endTime, @Param("status1") Byte status1, @Param("status2") Byte status2);
     List <SaleOpportunity> selectByTime(@Param("customerName")String customerName, @Param("startTime")Date startTime, @Param("endTime") Date endTime, @Param("status1") Byte status1, @Param("status2") Byte status2);
 
     SaleOpportunity selectByNumber(Integer id);
