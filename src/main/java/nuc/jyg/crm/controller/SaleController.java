@@ -7,6 +7,7 @@ import nuc.jyg.crm.model.Employee;
 import nuc.jyg.crm.model.SaleOpportunity;
 import nuc.jyg.crm.model.TimeQueryL;
 import nuc.jyg.crm.service.lxj.SalesAssignedService;
+import nuc.jyg.crm.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -65,6 +67,14 @@ public class SaleController {
     @GetMapping(value = "/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         SaleOpportunity saleOpportunity = saleOpportunityMaper.selectByPrimaryKey(id);
+        /** 查询可以分配的销售经理*/
+        List<Employee> employees = employeeMapper.selectAllByRole(Const.SystemUserEnum.CUSTOMER_MANAGER.getCode());
+
+        List <String> strings = new ArrayList();
+        for (Employee employee : employees) {
+            strings.add(employee.getName());
+        }
+        model.addAttribute("allEmployee", strings);
         model.addAttribute("allSale", saleOpportunity);
         return SALES_OPPORTUNITY_EDIT;
     }
@@ -81,9 +91,23 @@ public class SaleController {
     }
 
     /** 根据日期进行查询*/
-    @PostMapping(value = "querySaleByTime")
+    @PostMapping(value = "/querySaleByTime")
     public String query(TimeQueryL timeQueryL,Model model){
 
+        Date para1 = null;
+        Date para2 = null;
+        String name = null;
+        if (timeQueryL.getTimePara1()!=null && !timeQueryL.getTimePara1().isEmpty()) {
+            para1 = DateTimeUtil.strToDates(timeQueryL.getTimePara1());
+        }
+        if (timeQueryL.getTimePara2()!=null && !timeQueryL.getTimePara2().isEmpty()) {
+            para2 = DateTimeUtil.strToDates(timeQueryL.getTimePara2());
+        }
+        if(timeQueryL.getCustomer()!=null && !timeQueryL.getCustomer().isEmpty()){
+            name = timeQueryL.getCustomer();
+        }
+        List <SaleOpportunity> opportunityList =  saleOpportunityMaper.selectByTime(name,para1,para2, (byte) Const.SaleOpportunityStatusEnum.UNDISTRIBUTED.getCode(),null);
+        model.addAttribute("allSales", opportunityList);
         return SALES_OPPORTUNITY;
     }
 

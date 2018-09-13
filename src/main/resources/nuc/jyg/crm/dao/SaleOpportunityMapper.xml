@@ -46,12 +46,24 @@
     where status != #{status,jdbcType=INTEGER}
   </select>
 
-  <!--<select  id="selectByTime" resultMap="BaseResultMap" >-->
-    <!--select-->
-    <!--<include refid="Base_Column_List" />-->
-    <!--from crm_sale_opportunity-->
-    <!--where customer_name = #{customerName,jdbcType=INTEGER} AND create_time >=  #{createTime,jdbcType=INTEGER}-->
-  <!--</select>-->
+  <select  id="selectByTime" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from crm_sale_opportunity
+    where
+    <if test="customerName != null">
+         customer_name LIKE #{customerName}
+    </if>
+    <if test="startTime != null and endTime != null ">
+       AND create_time BETWEEN  #{startTime} AND  #{endTime}
+    </if>
+    <if test=" status1 != null ">
+      AND  status =  #{status1}
+    </if>
+    <if test=" status2 != null ">
+      AND  status !=  #{status2}
+    </if>
+  </select>
 
 
 
