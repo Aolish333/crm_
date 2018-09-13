@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="/public/html5shiv.js" th:src="@{/html5shiv.js}"></script>
+    <script type="text/javascript" src="/public/respond.min.js" th:src="@{/respond.min.js}"></script>
+    <script type="text/javascript" src="/public/jquery/1.9.1/jquery.min.js"
+            th:src="@{/jquery/1.9.1/jquery.min.js}"></script>
+    <!-- 引入 ECharts 文件 -->
+    <script type="text/javascript" src="/static/echarts.common.min.js" th:src="@{/echarts.common.min.js}"></script>
+    <title>客户贡献分析报表</title>
+</head>
+<body>
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+<div id="main" style="width: 100%;height:600px;"></div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    $.ajax({
+        url: '/report/data/contribution',
+        type: 'post',
+        dataType: 'json',  //返回的数据类型
+        success: function (result) {
+            contribution(result);
+        }
+    });
+
+
+    function contribution(result) {// 2018 - Jackson parse json
+        var data = eval(result);
+        option = {
+            // 全局调色盘
+            color: ['#2f4554'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: data.x,
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '订单金额',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: data.value
+                }
+            ]
+        };
+        myChart.setOption(option);
+        // 使用刚指定的配置项和数据显示图表。
+    }
+</script>
+</body>
+</html>

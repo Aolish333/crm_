@@ -95,11 +95,11 @@ public final class Const {
     @Getter
     public enum CustomerGradeEnum {
 
-        GRADE_STRATEGIC_PARTNERS(7, "战略合作伙伴"),
-        GRADE_PARTNERS(8, "合作伙伴"),
-        GRADE_BIG_CUSTOMER(9, "大客户"),
-        GRADE_KEY_CUSTOMERS(10, "重点开发客户"),
-        GRADE_ORDINARY_CUSTOMER(11, "普通客户");
+        GRADE_STRATEGIC_PARTNERS(0, "战略合作伙伴"),
+        GRADE_PARTNERS(1, "合作伙伴"),
+        GRADE_BIG_CUSTOMER(2, "大客户"),
+        GRADE_KEY_CUSTOMERS(3, "重点开发客户"),
+        GRADE_ORDINARY_CUSTOMER(4, "普通客户");
 
         private int code;
         private String value;
@@ -112,6 +112,8 @@ public final class Const {
     @Getter
     public enum CustomerCreditEnum {
 
+        CREDIT_ONE_STARS(1, "一颗星"),
+        CREDIT_TWO_STARS(2, "二颗星"),
         CREDIT_THREE_STARS(3, "三颗星"),
         CREDIT_FOUR_STARS(4, "四颗星"),
         Credit_FIVE_STARS(5, "五颗星");
@@ -192,6 +194,22 @@ public final class Const {
         ALLOCATED(1, "已分配"),
         PROCESSED(2, "已处理"),
         ARCHIVED(3, "已归档");
+
+        private int code;
+        private String value;
+    }
+
+    /**
+     * 查询年份枚举
+     */
+    @Getter
+    @AllArgsConstructor
+    public enum ServiceYearEnum {
+
+        YEAR_ALL(0, "全部"),
+        YEAR_2018(1, "2018"),
+        YEAR_2017(2, "2017"),
+        YEAR_2016(3, "2016");
 
         private int code;
         private String value;

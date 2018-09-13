@@ -1,179 +1,215 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="nuc.jyg.crm.dao.ProductMapper" >
-  <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.Product" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="product_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="produce_model" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="level_batch" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="unit" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="unit_price" jdbcType="DECIMAL" javaType="java.lang.Long" />
-      <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="warehouse" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, product_name, produce_model, level_batch, unit, unit_price, remark, warehouse, 
-    location, quantity, create_time, update_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from crm_product
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from crm_product
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="nuc.jyg.crm.model.Product" >
-    insert into crm_product (id, product_name, produce_model, 
-      level_batch, unit, unit_price, 
-      remark, warehouse, location, 
-      quantity, create_time, update_time
-      )
-    values (#{id,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{produceModel,jdbcType=VARCHAR}, 
-      #{levelBatch,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DECIMAL}, 
-      #{remark,jdbcType=VARCHAR}, #{warehouse,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
-      #{quantity,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Product" >
-    insert into crm_product
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="productName != null" >
-        product_name,
-      </if>
-      <if test="produceModel != null" >
-        produce_model,
-      </if>
-      <if test="levelBatch != null" >
-        level_batch,
-      </if>
-      <if test="unit != null" >
-        unit,
-      </if>
-      <if test="unitPrice != null" >
-        unit_price,
-      </if>
-      <if test="remark != null" >
-        remark,
-      </if>
-      <if test="warehouse != null" >
-        warehouse,
-      </if>
-      <if test="location != null" >
-        location,
-      </if>
-      <if test="quantity != null" >
-        quantity,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="productName != null" >
-        #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="produceModel != null" >
-        #{produceModel,jdbcType=VARCHAR},
-      </if>
-      <if test="levelBatch != null" >
-        #{levelBatch,jdbcType=VARCHAR},
-      </if>
-      <if test="unit != null" >
-        #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="unitPrice != null" >
-        #{unitPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="warehouse != null" >
-        #{warehouse,jdbcType=VARCHAR},
-      </if>
-      <if test="location != null" >
-        #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="quantity != null" >
-        #{quantity,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.Product" >
-    update crm_product
-    <set >
-      <if test="productName != null" >
-        product_name = #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="produceModel != null" >
-        produce_model = #{produceModel,jdbcType=VARCHAR},
-      </if>
-      <if test="levelBatch != null" >
-        level_batch = #{levelBatch,jdbcType=VARCHAR},
-      </if>
-      <if test="unit != null" >
-        unit = #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="unitPrice != null" >
-        unit_price = #{unitPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="warehouse != null" >
-        warehouse = #{warehouse,jdbcType=VARCHAR},
-      </if>
-      <if test="location != null" >
-        location = #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="quantity != null" >
-        quantity = #{quantity,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.Product" >
-    update crm_product
-    set product_name = #{productName,jdbcType=VARCHAR},
-      produce_model = #{produceModel,jdbcType=VARCHAR},
-      level_batch = #{levelBatch,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=VARCHAR},
-      unit_price = #{unitPrice,jdbcType=DECIMAL},
-      remark = #{remark,jdbcType=VARCHAR},
-      warehouse = #{warehouse,jdbcType=VARCHAR},
-      location = #{location,jdbcType=VARCHAR},
-      quantity = #{quantity,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="nuc.jyg.crm.dao.ProductMapper">
+    <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.Product">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="product_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="produce_model" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="level_batch" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="unit" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="unit_price" jdbcType="DECIMAL" javaType="java.lang.Long"/>
+            <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="warehouse" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="quantity" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, product_name, produce_model, level_batch, unit, unit_price, remark, warehouse,
+        location, quantity, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from crm_product
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM crm_product
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="nuc.jyg.crm.model.Product">
+        INSERT INTO crm_product (id, product_name, produce_model,
+                                 level_batch, unit, unit_price,
+                                 remark, warehouse, location,
+                                 quantity, create_time, update_time
+        )
+        VALUES (#{id,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{produceModel,jdbcType=VARCHAR},
+                                        #{levelBatch,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
+                                        #{unitPrice,jdbcType=DECIMAL},
+                                        #{remark,jdbcType=VARCHAR}, #{warehouse,jdbcType=VARCHAR},
+                                        #{location,jdbcType=VARCHAR},
+                                        #{quantity,jdbcType=INTEGER}, now(), now()
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Product">
+        insert into crm_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="produceModel != null">
+                produce_model,
+            </if>
+            <if test="levelBatch != null">
+                level_batch,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="unitPrice != null">
+                unit_price,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="warehouse != null">
+                warehouse,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+            <if test="quantity != null">
+                quantity,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="produceModel != null">
+                #{produceModel,jdbcType=VARCHAR},
+            </if>
+            <if test="levelBatch != null">
+                #{levelBatch,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice != null">
+                #{unitPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouse != null">
+                #{warehouse,jdbcType=VARCHAR},
+            </if>
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null">
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                now(),
+            </if>
+            <if test="updateTime != null">
+                now(),
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.Product">
+        update crm_product
+        <set>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="produceModel != null">
+                produce_model = #{produceModel,jdbcType=VARCHAR},
+            </if>
+            <if test="levelBatch != null">
+                level_batch = #{levelBatch,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice != null">
+                unit_price = #{unitPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouse != null">
+                warehouse = #{warehouse,jdbcType=VARCHAR},
+            </if>
+            <if test="location != null">
+                location = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null">
+                quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.Product">
+        UPDATE crm_product
+        SET product_name  = #{productName,jdbcType=VARCHAR},
+            produce_model = #{produceModel,jdbcType=VARCHAR},
+            level_batch   = #{levelBatch,jdbcType=VARCHAR},
+            unit          = #{unit,jdbcType=VARCHAR},
+            unit_price    = #{unitPrice,jdbcType=DECIMAL},
+            remark        = #{remark,jdbcType=VARCHAR},
+            warehouse     = #{warehouse,jdbcType=VARCHAR},
+            location      = #{location,jdbcType=VARCHAR},
+            quantity      = #{quantity,jdbcType=INTEGER},
+            create_time   = #{createTime,jdbcType=TIMESTAMP},
+            update_time   = #{updateTime,jdbcType=TIMESTAMP}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM crm_product
+    </select>
+    <select id="selectByNameAndModelAndLevel" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM crm_product
+        <where>
+            <if test="productName!=null">
+                AND product_name = #{productName}
+            </if>
+            <if test="productModel!=null">
+                AND produce_model = #{productModel}
+            </if>
+            <if test="levelBatch!=null">
+                AND level_batch = #{levelBatch}
+            </if>
+        </where>
+    </select>
+    <select id="selectByNameAndWarehouse" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM crm_product
+        <where>
+            <if test="productName!=null">
+                AND product_name = #{productName}
+            </if>
+            <if test="warehouse!=null">
+                AND warehouse = #{warehouse}
+            </if>
+        </where>
+    </select>
 </mapper>

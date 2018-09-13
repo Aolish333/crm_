@@ -37,8 +37,8 @@
       update_time)
     values (#{id,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{sex,jdbcType=TINYINT}, #{position,jdbcType=VARCHAR}, #{officePhone,jdbcType=VARCHAR}, 
-      #{mobilePhone,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{mobilePhone,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, now(),
+            now())
   </insert>
   <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Contact" >
     insert into crm_contact
@@ -100,10 +100,10 @@
         #{remarks,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>

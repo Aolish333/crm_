@@ -1,237 +1,253 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="nuc.jyg.crm.dao.ServiceMapper" >
-  <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.Service" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="service_number" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="kind" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="summary" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="customer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="service_request" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="founder" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="customer_manager" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="distribution_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="service_process" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="processer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="process_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="process_result" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="process_satisfaction" jdbcType="TINYINT" javaType="java.lang.Byte" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, service_number, kind, summary, customer_name, status, service_request, founder, 
-    customer_manager, distribution_time, service_process, processer_name, process_time, 
-    create_time, update_time, process_result, process_satisfaction
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from crm_service
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from crm_service
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="nuc.jyg.crm.model.Service" >
-    insert into crm_service (id, service_number, kind, 
-      summary, customer_name, status, 
-      service_request, founder, customer_manager, 
-      distribution_time, service_process, processer_name, 
-      process_time, create_time, update_time, 
-      process_result, process_satisfaction)
-    values (#{id,jdbcType=INTEGER}, #{serviceNumber,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR}, 
-      #{summary,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{serviceRequest,jdbcType=VARCHAR}, #{founder,jdbcType=VARCHAR}, #{customerManager,jdbcType=VARCHAR}, 
-      #{distributionTime,jdbcType=TIMESTAMP}, #{serviceProcess,jdbcType=VARCHAR}, #{processerName,jdbcType=VARCHAR}, 
-      #{processTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{processResult,jdbcType=VARCHAR}, #{processSatisfaction,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Service" >
-    insert into crm_service
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="serviceNumber != null" >
-        service_number,
-      </if>
-      <if test="kind != null" >
-        kind,
-      </if>
-      <if test="summary != null" >
-        summary,
-      </if>
-      <if test="customerName != null" >
-        customer_name,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="serviceRequest != null" >
-        service_request,
-      </if>
-      <if test="founder != null" >
-        founder,
-      </if>
-      <if test="customerManager != null" >
-        customer_manager,
-      </if>
-      <if test="distributionTime != null" >
-        distribution_time,
-      </if>
-      <if test="serviceProcess != null" >
-        service_process,
-      </if>
-      <if test="processerName != null" >
-        processer_name,
-      </if>
-      <if test="processTime != null" >
-        process_time,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="processResult != null" >
-        process_result,
-      </if>
-      <if test="processSatisfaction != null" >
-        process_satisfaction,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="serviceNumber != null" >
-        #{serviceNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="kind != null" >
-        #{kind,jdbcType=VARCHAR},
-      </if>
-      <if test="summary != null" >
-        #{summary,jdbcType=VARCHAR},
-      </if>
-      <if test="customerName != null" >
-        #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="serviceRequest != null" >
-        #{serviceRequest,jdbcType=VARCHAR},
-      </if>
-      <if test="founder != null" >
-        #{founder,jdbcType=VARCHAR},
-      </if>
-      <if test="customerManager != null" >
-        #{customerManager,jdbcType=VARCHAR},
-      </if>
-      <if test="distributionTime != null" >
-        #{distributionTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="serviceProcess != null" >
-        #{serviceProcess,jdbcType=VARCHAR},
-      </if>
-      <if test="processerName != null" >
-        #{processerName,jdbcType=VARCHAR},
-      </if>
-      <if test="processTime != null" >
-        #{processTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="processResult != null" >
-        #{processResult,jdbcType=VARCHAR},
-      </if>
-      <if test="processSatisfaction != null" >
-        #{processSatisfaction,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.Service" >
-    update crm_service
-    <set >
-      <if test="serviceNumber != null" >
-        service_number = #{serviceNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="kind != null" >
-        kind = #{kind,jdbcType=VARCHAR},
-      </if>
-      <if test="summary != null" >
-        summary = #{summary,jdbcType=VARCHAR},
-      </if>
-      <if test="customerName != null" >
-        customer_name = #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="serviceRequest != null" >
-        service_request = #{serviceRequest,jdbcType=VARCHAR},
-      </if>
-      <if test="founder != null" >
-        founder = #{founder,jdbcType=VARCHAR},
-      </if>
-      <if test="customerManager != null" >
-        customer_manager = #{customerManager,jdbcType=VARCHAR},
-      </if>
-      <if test="distributionTime != null" >
-        distribution_time = #{distributionTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="serviceProcess != null" >
-        service_process = #{serviceProcess,jdbcType=VARCHAR},
-      </if>
-      <if test="processerName != null" >
-        processer_name = #{processerName,jdbcType=VARCHAR},
-      </if>
-      <if test="processTime != null" >
-        process_time = #{processTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="processResult != null" >
-        process_result = #{processResult,jdbcType=VARCHAR},
-      </if>
-      <if test="processSatisfaction != null" >
-        process_satisfaction = #{processSatisfaction,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.Service" >
-    update crm_service
-    set service_number = #{serviceNumber,jdbcType=VARCHAR},
-      kind = #{kind,jdbcType=VARCHAR},
-      summary = #{summary,jdbcType=VARCHAR},
-      customer_name = #{customerName,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
-      service_request = #{serviceRequest,jdbcType=VARCHAR},
-      founder = #{founder,jdbcType=VARCHAR},
-      customer_manager = #{customerManager,jdbcType=VARCHAR},
-      distribution_time = #{distributionTime,jdbcType=TIMESTAMP},
-      service_process = #{serviceProcess,jdbcType=VARCHAR},
-      processer_name = #{processerName,jdbcType=VARCHAR},
-      process_time = #{processTime,jdbcType=TIMESTAMP},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      process_result = #{processResult,jdbcType=VARCHAR},
-      process_satisfaction = #{processSatisfaction,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="nuc.jyg.crm.dao.ServiceMapper">
+    <resultMap id="BaseResultMap" type="nuc.jyg.crm.model.Service">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="service_number" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="kind" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="summary" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="customer_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+            <arg column="service_request" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="founder" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="customer_manager" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="distribution_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="service_process" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="processer_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="process_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="process_result" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="process_satisfaction" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, service_number, kind, summary, customer_name, status, service_request, founder,
+        customer_manager, distribution_time, service_process, processer_name, process_time,
+        create_time, update_time, process_result, process_satisfaction
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from crm_service
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM crm_service
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="nuc.jyg.crm.model.Service">
+        INSERT INTO crm_service (id, service_number, kind,
+                                 summary, customer_name, status,
+                                 service_request, founder, customer_manager,
+                                 distribution_time, service_process, processer_name,
+                                 process_time, create_time, update_time,
+                                 process_result, process_satisfaction)
+        VALUES (#{id,jdbcType=INTEGER}, #{serviceNumber,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR},
+                                        #{summary,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR},
+                                        #{status,jdbcType=TINYINT},
+                                        #{serviceRequest,jdbcType=VARCHAR}, #{founder,jdbcType=VARCHAR},
+                                        #{customerManager,jdbcType=VARCHAR},
+                                        #{distributionTime,jdbcType=TIMESTAMP}, #{serviceProcess,jdbcType=VARCHAR},
+                #{processerName,jdbcType=VARCHAR},
+                #{processTime,jdbcType=TIMESTAMP}, now(), now(),
+                #{processResult,jdbcType=VARCHAR}, #{processSatisfaction,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Service">
+        insert into crm_service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="serviceNumber != null">
+                service_number,
+            </if>
+            <if test="kind != null">
+                kind,
+            </if>
+            <if test="summary != null">
+                summary,
+            </if>
+            <if test="customerName != null">
+                customer_name,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="serviceRequest != null">
+                service_request,
+            </if>
+            <if test="founder != null">
+                founder,
+            </if>
+            <if test="customerManager != null">
+                customer_manager,
+            </if>
+            <if test="distributionTime != null">
+                distribution_time,
+            </if>
+            <if test="serviceProcess != null">
+                service_process,
+            </if>
+            <if test="processerName != null">
+                processer_name,
+            </if>
+            <if test="processTime != null">
+                process_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="processResult != null">
+                process_result,
+            </if>
+            <if test="processSatisfaction != null">
+                process_satisfaction,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="serviceNumber != null">
+                #{serviceNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="kind != null">
+                #{kind,jdbcType=VARCHAR},
+            </if>
+            <if test="summary != null">
+                #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="serviceRequest != null">
+                #{serviceRequest,jdbcType=VARCHAR},
+            </if>
+            <if test="founder != null">
+                #{founder,jdbcType=VARCHAR},
+            </if>
+            <if test="customerManager != null">
+                #{customerManager,jdbcType=VARCHAR},
+            </if>
+            <if test="distributionTime != null">
+                #{distributionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="serviceProcess != null">
+                #{serviceProcess,jdbcType=VARCHAR},
+            </if>
+            <if test="processerName != null">
+                #{processerName,jdbcType=VARCHAR},
+            </if>
+            <if test="processTime != null">
+                #{processTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                now(),
+            </if>
+            <if test="updateTime != null">
+                now(),
+            </if>
+            <if test="processResult != null">
+                #{processResult,jdbcType=VARCHAR},
+            </if>
+            <if test="processSatisfaction != null">
+                #{processSatisfaction,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="nuc.jyg.crm.model.Service">
+        update crm_service
+        <set>
+            <if test="serviceNumber != null">
+                service_number = #{serviceNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="kind != null">
+                kind = #{kind,jdbcType=VARCHAR},
+            </if>
+            <if test="summary != null">
+                summary = #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="serviceRequest != null">
+                service_request = #{serviceRequest,jdbcType=VARCHAR},
+            </if>
+            <if test="founder != null">
+                founder = #{founder,jdbcType=VARCHAR},
+            </if>
+            <if test="customerManager != null">
+                customer_manager = #{customerManager,jdbcType=VARCHAR},
+            </if>
+            <if test="distributionTime != null">
+                distribution_time = #{distributionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="serviceProcess != null">
+                service_process = #{serviceProcess,jdbcType=VARCHAR},
+            </if>
+            <if test="processerName != null">
+                processer_name = #{processerName,jdbcType=VARCHAR},
+            </if>
+            <if test="processTime != null">
+                process_time = #{processTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="processResult != null">
+                process_result = #{processResult,jdbcType=VARCHAR},
+            </if>
+            <if test="processSatisfaction != null">
+                process_satisfaction = #{processSatisfaction,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="nuc.jyg.crm.model.Service">
+        UPDATE crm_service
+        SET service_number       = #{serviceNumber,jdbcType=VARCHAR},
+            kind                 = #{kind,jdbcType=VARCHAR},
+            summary              = #{summary,jdbcType=VARCHAR},
+            customer_name        = #{customerName,jdbcType=VARCHAR},
+            status               = #{status,jdbcType=TINYINT},
+            service_request      = #{serviceRequest,jdbcType=VARCHAR},
+            founder              = #{founder,jdbcType=VARCHAR},
+            customer_manager     = #{customerManager,jdbcType=VARCHAR},
+            distribution_time    = #{distributionTime,jdbcType=TIMESTAMP},
+            service_process      = #{serviceProcess,jdbcType=VARCHAR},
+            processer_name       = #{processerName,jdbcType=VARCHAR},
+            process_time         = #{processTime,jdbcType=TIMESTAMP},
+            create_time          = #{createTime,jdbcType=TIMESTAMP},
+            update_time          = #{updateTime,jdbcType=TIMESTAMP},
+            process_result       = #{processResult,jdbcType=VARCHAR},
+            process_satisfaction = #{processSatisfaction,jdbcType=TINYINT}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectCountByYear" resultType="java.lang.Integer" parameterType="map">
+        SELECT count(1)
+        FROM crm_service
+        <where>
+            <if test="year!=null">
+                <bind name="years" value="'%'+year+'%'"/>
+                AND create_time like #{years}
+            </if>
+            <if test="way!=null">
+                AND kind = #{way}
+            </if>
+        </where>
+    </select>
 </mapper>

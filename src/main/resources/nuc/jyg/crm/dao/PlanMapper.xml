@@ -20,15 +20,6 @@
     from crm_plan
     where id = #{id,jdbcType=INTEGER}
   </select>
-
-  <select id="selectBySid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from crm_plan
-    where sale_id = #{saleId,jdbcType=INTEGER}
-  </select>
-
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from crm_plan
     where id = #{id,jdbcType=INTEGER}
@@ -38,7 +29,7 @@
       plan_result, create_time, update_time
       )
     values (#{id,jdbcType=INTEGER}, #{saleId,jdbcType=INTEGER}, #{planContent,jdbcType=VARCHAR}, 
-      #{planResult,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},now()
+      #{planResult,jdbcType=VARCHAR}, now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Plan" >
@@ -77,10 +68,10 @@
         #{planResult,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>

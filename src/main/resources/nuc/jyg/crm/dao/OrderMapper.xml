@@ -22,6 +22,25 @@
     from crm_order
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByCustomerIdAndStatus" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from crm_order
+    where customer_id = #{id} and status = #{status}
+  </select>
+  <select id="selectOrdersByUserIdAndStatusAndYears" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from crm_order
+    where customer_id = #{id} and status = #{status}
+    and update_time between #{yearsStart} and #{yearsEnd}
+  </select>
+  <select id="selectLastOrdersByCustomerId" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />,max(update_time) time
+    from crm_order
+    where customer_id = #{customerId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from crm_order
     where id = #{id,jdbcType=INTEGER}
@@ -31,8 +50,8 @@
       customer_name, status, address, 
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{customerId,jdbcType=INTEGER}, 
-      #{customerName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      #{customerName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR},
+            now(), now())
   </insert>
   <insert id="insertSelective" parameterType="nuc.jyg.crm.model.Order" >
     insert into crm_order
@@ -82,10 +101,10 @@
         #{address,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>

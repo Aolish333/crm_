@@ -2,6 +2,9 @@ package nuc.jyg.crm.dao;
 
 import nuc.jyg.crm.model.CustomerLoss;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.ArrayList;
 
 @Mapper
 public interface CustomerLossMapper {
@@ -17,4 +20,8 @@ public interface CustomerLossMapper {
     int updateByPrimaryKeySelective(CustomerLoss record);
 
     int updateByPrimaryKey(CustomerLoss record);
+
+    ArrayList<CustomerLoss> selectCusByCusNameAndManName(@Param("customerName") String customerName,
+                                                         @Param("managerName") String managerName,
+                                                         @Param("status") Integer status);
 }
